@@ -37,27 +37,3 @@
     box-shadow: 2px 2px 4px #dfe2e6;
     padding: 8px 16px;
 }
-
-.pacer-exemplo-container {
-    padding: 0  30px 0 95px;
-}
-
-.pacer-exemplo-title {
-    font-weight: 500;
-    font-size: 18px;
-    padding-bottom: 10px;
-}
-
-.pacer-exemplo-group {
-    padding-bottom: 10px;
-}
-
-.pacer-exemplo-subtitle {
-    font-weight: 500;
-}
-
-.pacer-exemplo-list {
-    list-style-type: disc;
-    margin-left: 38px;
-    padding: 10px 0;
-}
