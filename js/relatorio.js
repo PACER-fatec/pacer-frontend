@@ -1,0 +1,3 @@
+function Extrair_Relatorio(){
+    
+}
