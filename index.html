@@ -4,15 +4,142 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="estilo.css">
-        <script src="script.js"></script>
-        <title>Kickstart</title>
+        <link rel="stylesheet" href="./style/reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="./style/base.css">
+        <link rel="stylesheet" href="./style/form-estudante.css">
+        <script src="./js/script.js"></script>
+        <title>PACER Fatec</title>
     </head>
     <body>
-        <form action="http://localhost:5000/pacer/test" method="post">
-            <input name="campo1">
-            <input name="campo2">
-            <button>Enviar</button>
-        </form>
+        <div class="body-container">
+            <div class="main-header">
+                <span class="main-header-title">PACER</span> Fatec
+            </div>
+            <div class="student-form-container">
+                <form class="student-form" action="http://localhost:5000/pacer/test" method="post">
+
+                    <label class="student-form-label" for="sprint">Sprint</label>
+                    <select class="student-form-value" name="sprint" id="sprint">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select>
+
+                    <div class="student-form-input-label-group">
+                        <div class="student-form-input-label">
+                            <label class="student-form-label" for="avaliador">Nome do avaliador</label>
+                            <input class="student-form-value" name="avaliador" placeholder="Ex: Rubens"/>
+                        </div>
+                        
+                        <div class="student-form-input-label">
+                            <label class="student-form-label" for="ra-avaliador">RA do avaliador</label>
+                            <input class="student-form-value" name="ra-avaliador" placeholder="Ex: 458965700019"/>
+                        </div>
+                    </div>
+
+                    <div class="student-form-input-label-group">
+                        <div class="student-form-input-label">
+                            <label class="student-form-label" for="avaliado">Nome do avaliado</label>
+                            <input class="student-form-value" name="avaliado" placeholder="Ex: Mateus"/>
+                        </div>
+    
+                        <div class="student-form-input-label">
+                            <label class="student-form-label" for="ra-avaliado">RA do avaliado</label>
+                            <input class="student-form-value" name="ra-avaliado" placeholder="Ex: 458965700019"/>
+                        </div>
+                    </div>
+
+                    <label class="student-form-label" for="proatividade">Proatividade</label>
+                    <select class="student-form-value" name="proatividade" id="proatividade">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    
+                    <label class="student-form-label" for="autonomia">Autonomia</label>
+                    <select class="student-form-value" name="autonomia" id="autonomia">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+
+                    <label class="student-form-label" for="colaboracao">Colaboração</label>
+                    <select class="student-form-value" name="colaboracao" id="colaboracao">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+
+                    <label class="student-form-label" for="entrega-resultados">Entrega de Resultados</label>
+                    <select class="student-form-value" name="entrega-resultados" id="entrega-resultados">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+
+                    <button class="student-form-button">Enviar</button>
+                </form>
+                <div class="pacer-exemplo-container">
+                    <h3 class="pacer-exemplo-title">Proatividade</h3>
+                    <div class="pacer-exemplo-group">
+                        <span class="pacer-exemplo-subtitle">0 - Reativo</span>
+                        <ul class="pacer-exemplo-list">
+                            <li>Não tem iniciativa alguma, fica esperando alguém dizer o que fazer ou que o problema apareça;</li>
+                            <li>Não observa os próximos passos do planejamento;</li>
+                        </ul>
+                        Exemplo: Está vendo o que está errado e não se move para ajudar.
+                    </div>
+                    <div class="pacer-exemplo-group">
+                        <span class="pacer-exemplo-subtitle">1 - Desfocado</span>
+                        <ul class="pacer-exemplo-list">
+                            <li>Pega muitas atividades gerais e não inicia nenhuma devidamente;</li>
+                            <li>Mesmo nas tarefas mais simples tem respostas lentas;</li>
+                        </ul>
+                        Exemplo: Quando termina sua atividade inicial, fica quieto esperando o final da sprint.
+                    </div>
+                    <div class="pacer-exemplo-group">
+                        <span class="pacer-exemplo-subtitle">2 - Ativo</span>
+                        <ul class="pacer-exemplo-list">
+                            <li>Tenta pegar as tarefas mais difíceis sempre que possível;</li>
+                            <li>Fundamental para alcançar a meta da sprint;</li>
+                            <li>Pode se enroscar em pequenos problemas não previstos;</li>
+                        </ul>
+                        Exemplo: Pega uma tarefa mas eventualmente subestima sua complexidade.
+                    </div>
+                    <div class="pacer-exemplo-group">
+                        <span class="pacer-exemplo-subtitle">3 - Proativo</span>
+                        <ul class="pacer-exemplo-list">
+                            <li>Foco nas tarefas mais valiosas;</li>
+                            <li>Além da iniciativa, evita problemas antecipadamente;</li>
+                            <li>Altíssima produtividade, foco em uma tarefa por vez e sempre bem feita;</li>
+                        </ul>
+                        Exemplo: Pega uma tarefa e avalia precisamente sua complexidade
+                    </div>
+                    <h3 class="pacer-exemplo-title">Autonomia</h3>
+                    <div>
+                        O aluno conseguiu realizar tarefas sozinho? Quando precisou de ajuda, procurou encontrar uma solução por 
+                        meio de pesquisa ou partiu diretamente para perguntar aos outros integrantes?
+                    </div>
+                    <h3 class="pacer-exemplo-title">Colaboração</h3>
+                    <div>
+                        O aluno é uma pessoa essencial ao time? Sempre disposto a ajudar tanto seu time quando ao do outros?
+                    </div>
+                    <h3 class="pacer-exemplo-title">Entrega de Resultados</h3>
+                    <div>
+                        O aluno entregou as atividades combinado
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
