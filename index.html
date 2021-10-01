@@ -11,7 +11,8 @@
         <link rel="stylesheet" href="./style/base.css">
         <link rel="stylesheet" href="./style/form-estudante.css">
         <link rel="stylesheet" href="./style/pacer-exemplo.css">
-        <script src="./js/script.js"></script>
+        <script src="./js/baseScript.js"></script>
+        <script src="./js/avaliacao.js"></script>
         <title>PACER Fatec</title>
     </head>
     <body>
@@ -35,14 +36,14 @@
                     <div class="student-form-input-label-group">
                         <div class="student-form-input-label">
                             <label class="student-form-label" for="avaliador">Nome do avaliador</label>
-                            <input class="student-form-value" name="avaliador" placeholder="Ex: Rubens" required/>
+                            <select class="student-form-value" name="avaliador" id="avaliador" required></select>
                         </div>
                     </div>
 
                     <div class="student-form-input-label-group">
                         <div class="student-form-input-label">
                             <label class="student-form-label" for="avaliado">Nome do avaliado</label>
-                            <input class="student-form-value" name="avaliado" placeholder="Ex: Mateus" required/>
+                            <select class="student-form-value" name="avaliado" id="avaliado" required></select>
                         </div>
                     </div>
 
