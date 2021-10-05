@@ -1,5 +1,5 @@
 // Isso é uma mock pra conseguir imaginar o front melhor, tirar isso aqui
-let alunos = [
+/*let alunos = [
     {
         'id': 1,
         'nome': 'Raimundo Otonni',
@@ -21,10 +21,11 @@ let alunos = [
         'grupo': 2
     }
 ]
-
+*/
 window.addEventListener('load', (event) => {
     // Faz request p/ backend para pegar a listagem de alunos
-    // axios.get()
+    axios.get()
+    listarAlunos();
     populateSelect('avaliador', alunos);
 
     let evaluatorSelect = document.getElementById('avaliador');
