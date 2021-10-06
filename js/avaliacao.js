@@ -42,20 +42,10 @@ window.addEventListener('load', (event) => {
         // Faz request p/ backend para pegar específico do grupo ou, caso os alunos 
         // venham com grupo no dicionário, dá pra fazer um array.filter()
         clearAssessedSelect();
-
-        axios.get('http://localhost:5000/pacer/alunos')
-        .then((res) => {
-            alunos = res.data
-            let avaliador = alunos.filter((a) => a._id === event.target.value)[0];
-            console.log(avaliador)
-            let avaliadoList = alunos.filter((a) => a.grupo === avaliador.grupo && a._id !== avaliador._id);
-            populateSelect('avaliado', avaliadoList);
-        })
-        .catch((err) => {
-            console.warn(err)
-        })
-
-
+        let avaliador = alunos.filter((a) => a._id === event.target.value)[0];
+        console.log(avaliador)
+        let avaliadoList = alunos.filter((a) => a.grupo === avaliador.grupo && a._id !== avaliador._id);
+        populateSelect('avaliado', avaliadoList);
     });
 });
 
