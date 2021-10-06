@@ -18,6 +18,6 @@ const createOption = (value, text, father) => {
 const populateSelect = (selectId, optionsList) => {
     let select = document.getElementById(`${selectId}`);
     optionsList.forEach((option) => {
-        createOption(option.id, option.nome, select)
+        createOption(option._id, option.nome, select)
     });
 }
