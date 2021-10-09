@@ -54,5 +54,15 @@ const sendEvaluation = () => {
         headers: {'Content-Type': 'multipart/form-data'}
     }).then((response) => {
         mensagemSpan.innerHTML = response.data
+        changeMessageColor(mensagemSpan.innerHTML); 
     });
+}
+
+function changeMessageColor(mensagem) {
+    const span = document.getElementById('mensagem');
+    if(mensagem == 'Avaliação enviada! Obrigado.') {
+        span.style.color = "#32CD32"
+    } else {
+        span.style.color = '#B22222'
+    }
 }
