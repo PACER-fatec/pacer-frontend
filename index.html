@@ -23,7 +23,7 @@
                 <span class="main-header-title">PACER</span> Fatec
             </div>
             <div class="student-form-container">
-                <form class="student-form" action="http://localhost:5000/pacer" method="post">
+                <form class="student-form" action="javascript:sendEvaluation()" method="post">
 
                     <label class="student-form-label" for="sprint">Sprint</label>
                     <select class="student-form-value" name="sprint" id="sprint">
@@ -82,6 +82,7 @@
                     </select>
 
                     <button type="submit" class="student-form-button">Enviar</button>
+                    <span style="margin-top: 10px;" id="mensagem"></span>
                 </form>
                 <div class="pacer-exemplo-container">
                     <div class="pacer-exemplo-session">

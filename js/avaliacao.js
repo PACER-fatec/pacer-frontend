@@ -1,28 +1,5 @@
-// Isso é uma mock pra conseguir imaginar o front melhor, tirar isso aqui
 let alunos = []
-/*
-    {
-        'id': 1,
-        'nome': 'Raimundo Otonni',
-        'grupo': 1
-    },
-    {
-        'id': 2,
-        'nome': 'Gabriela Antunes',
-        'grupo': 1
-    },
-    {
-        'id': 3,
-        'nome': 'Geraldo Nunes',
-        'grupo': 2
-    },
-    {
-        'id': 4,
-        'nome': 'Liliane Moraes',
-        'grupo': 2
-    }
-]
-*/
+
 window.addEventListener('load', (event) => {
     // Faz request p/ backend para pegar a listagem de alunos
     axios.get('http://localhost:5000/pacer/alunos')
@@ -39,8 +16,7 @@ window.addEventListener('load', (event) => {
     let evaluatorSelect = document.getElementById('avaliador');
 
     evaluatorSelect.addEventListener('change', (event) => {
-        // Faz request p/ backend para pegar específico do grupo ou, caso os alunos 
-        // venham com grupo no dicionário, dá pra fazer um array.filter()
+        // Filtra alunos do mesmo gtupo e popula o segundo select
         clearAssessedSelect();
         let avaliador = alunos.filter((a) => a._id === event.target.value)[0];
         console.log(avaliador)
@@ -53,3 +29,32 @@ const clearAssessedSelect = () => {
     let assessedSelect = document.getElementById('avaliado');
     assessedSelect.innerHTML = '';
 };
+
+const sendEvaluation = () => {
+    const sprintSelect = document.getElementById('sprint');
+    const avaliadorSelect = document.getElementById('avaliador');
+    const avaliadoSelect = document.getElementById('avaliado');
+    const proatividadeSelect = document.getElementById('proatividade');
+    const autonomiaSelect = document.getElementById('autonomia');
+    const colaboracaoSelect = document.getElementById('colaboracao');
+    const resultadosSelect = document.getElementById('entrega-resultados');
+    const mensagemSpan = document.getElementById('mensagem');
+
+    let formData = new FormData();
+    formData.append('sprint', sprintSelect.value);
+    formData.append('avaliador', avaliadorSelect.value);
+    formData.append('avaliado', avaliadoSelect.value);
+    formData.append('proatividade', proatividadeSelect.value);
+    formData.append('autonomia', autonomiaSelect.value);
+    formData.append('colaboracao', colaboracaoSelect.value);
+    formData.append('entrega-resultados', resultadosSelect.value);
+
+    axios({
+        method: 'post',
+        url: 'localhost:5000/pacer',
+        data: formData,
+        headers: {'Content-Type': 'multipart/form-data'}
+    }).then((response) => {
+        mensagemSpan.innerHTML = response
+    });
+}
