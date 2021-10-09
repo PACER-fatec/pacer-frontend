@@ -5,7 +5,6 @@ window.addEventListener('load', (event) => {
     axios.get('http://localhost:5000/pacer/alunos')
     .then((res) => {
         alunos = res.data
-        console.log(alunos)
         populateSelect('avaliador', alunos);
     })
     .catch((err) => {
@@ -19,7 +18,6 @@ window.addEventListener('load', (event) => {
         // Filtra alunos do mesmo gtupo e popula o segundo select
         clearAssessedSelect();
         let avaliador = alunos.filter((a) => a._id === event.target.value)[0];
-        console.log(avaliador)
         let avaliadoList = alunos.filter((a) => a.grupo === avaliador.grupo && a._id !== avaliador._id);
         populateSelect('avaliado', avaliadoList);
     });
@@ -51,10 +49,10 @@ const sendEvaluation = () => {
 
     axios({
         method: 'post',
-        url: 'localhost:5000/pacer',
+        url: 'http://localhost:5000/pacer',
         data: formData,
         headers: {'Content-Type': 'multipart/form-data'}
     }).then((response) => {
-        mensagemSpan.innerHTML = response
+        mensagemSpan.innerHTML = response.data
     });
 }
