@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="./style/relatorio.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
         <script src="./js/relatorio.js"></script>
+        <script src="./js/uploadAlunos.js"></script>
         <title>PACER Fatec</title>
     </head>
     <body>
@@ -18,7 +19,17 @@
             </div>
             <div class="relatorio-container">
                 <div>
-                    <div style="margin-bottom: 10px;">Esta página é de uso exclusivo do cliente.</div>
+                    <span>Esta página é de uso exclusivo do professor.</span>
+                </div>
+                <div style="margin-top: 50px;">
+                    <span>Insira um arquivo .CSV contendo os alunos para alimentação da base de dados do sistema.</span>
+                    </br></br>
+                    <form action= "http://localhost:5000/pacer/uploadAlunos" method="POST" enctype="multipart/form-data">
+                        <div style="margin-bottom: 10px;"><input type="file" name="alunos" id="fileOpen"></div>
+                        <div style="margin-bottom: 10px;"><input type="submit" onclick="mensagem()" id="botaoFile"></div>
+                    </form>
+                </div>
+                <div style="margin-top: 50px;">
                     <div style="margin-bottom: 10px;">Para extrair um relatório contendo todas as avaliações, clique no botão abaixo:</div>
                     <button class="extrair-relatorio-button" onclick="extrairRelatorio()">Extrair relatório</button>
                 </div>

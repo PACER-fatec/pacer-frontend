@@ -2,6 +2,7 @@ function extrairRelatorio(){
     axios({
         method: 'GET',
         url: 'http://localhost:5000/pacer/csvfile',
+        crossDomain: true,
         responseType: 'blob'
     }).then((response) => {
         const url = window.URL.createObjectURL(new Blob([response.data]));
