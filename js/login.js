@@ -16,11 +16,17 @@ const login = () => {
     formData.append('senha', senhaInput.value);
 
     axios({
-        method: 'post',
+        method: 'POST',
         url: 'http://localhost:5000/pacer/login',
+        crossDomain: true,
         data: formData,
         headers: {'Content-Type': 'multipart/form-data'}
     }).then((response) => {
-        window.location.href = "dashboard.html";
+        if (response.data == true) {
+            window.location.href = "dashboard.html";
+        } else {
+            alert('Usuário ou senha incorreto!')
+            window.location.href = "login.html";
+        }
     });
 }
