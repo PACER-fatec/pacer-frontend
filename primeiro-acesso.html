@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="./style/base.css">
         <link rel="stylesheet" href="./style/login.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
-        <script src="./js/login.js"></script>
+        <script src="./js/primeiro-acesso.js"></script>
         <title>PACER Fatec</title>
     </head>
     <body>
@@ -21,12 +21,12 @@
             </div>
             <div class="login-container">
                 <div class="login-card">
-                    <div class="login-cta">Faça login para continuar:</div>
-                    <label class="login-input-label" for="nome">Nome</label>
-                    <input class="login-input" type="text" name="nome" id="nome-login" required />
+                    <div class="login-cta">Defina sua senha:</div>
                     <label class="login-input-label" for="senha">Senha</label>
-                    <input class="login-input" type="password" name="senha" id="senha-login">
-                    <button class="login-button" id="button-login">Entrar</button>
+                    <input class="login-input" type="password" name="senha" id="senha" required />
+                    <label class="login-input-label" for="senha-confirmacao">Confirmação de senha</label>
+                    <input class="login-input" type="password" name="senha-confirmacao" id="senha-confirmacao">
+                    <button class="login-button" id="button-confirmar">Confirmar</button>
                     <span class="mensagem-erro" style="margin-top: 10px;" id="mensagem"></span>
                 </div>
             </div>

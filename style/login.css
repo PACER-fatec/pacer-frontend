@@ -42,3 +42,7 @@
     padding: 8px 16px;
     margin-top: 15px;
 }
+
+.mensagem-erro {
+    color: red;
+}
