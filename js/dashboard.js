@@ -1,3 +1,15 @@
+window.addEventListener('load', (event) => {
+    if (!window.sessionStorage.getItem('logged')) {
+        window.location.href = 'login.html'
+    }
+
+    let sairButton = document.getElementById('sair');
+    sairButton.addEventListener('click', (event) => {
+        window.sessionStorage.removeItem('logged')
+        window.location.href = 'login.html'
+    })
+})
+
 function extrairRelatorio(){
     axios({
         method: 'GET',
