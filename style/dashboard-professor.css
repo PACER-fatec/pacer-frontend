@@ -1,7 +1,7 @@
 .relatorio-container {
-    padding: 10px 105px;
+    padding: 50px 105px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .extrair-relatorio-button {
@@ -12,4 +12,36 @@
     border: none;
     box-shadow: 2px 2px 4px #dfe2e6;
     padding: 8px 16px;
+}
+
+.radar-chart {
+    max-width: 500px !important;
+    max-height: 500px !important;
+}
+
+.grafico-container {
+    width: 50%;
+}
+
+.opcoes-container {
+    width: 50%;
+}
+
+.grafico-titulo {
+    font-weight: 700;
+    margin-bottom: 30px;
+    font-size: 20px;
+}
+
+.select-grafico-container {
+    margin-bottom: 20px;
+}
+
+.label-valor {
+    margin-right: 5px;
+    font-size: 15px;
+}
+
+.select-valor {
+    margin-right: 20px;
 }
