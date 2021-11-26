@@ -1,7 +1,25 @@
 window.addEventListener('load', (event) => {
-    if (!window.sessionStorage.getItem('logged')) {
-        window.location.href = 'login.html'
-    }
+    // if (!window.sessionStorage.getItem('logged')) {
+    //     window.location.href = 'login.html'
+    // }
+
+    axios.get('http://localhost:5000/pacer/sprints')
+    .then((res) => {
+        sprints = res.data
+        populateSelectArray('sprint', sprints);
+    })
+    .catch((err) => {
+        console.warn(err)
+    })
+
+    axios.get('http://localhost:5000/pacer/alunos')
+    .then((res) => {
+        alunos = res.data
+        populateSelect('aluno', alunos, true);
+    })
+    .catch((err) => {
+        console.warn(err)
+    })
 
     let sairButton = document.getElementById('sair');
     sairButton.addEventListener('click', (event) => {
@@ -9,10 +27,16 @@ window.addEventListener('load', (event) => {
         window.location.href = 'login.html'
     })
 
+    let graficoButton = document.getElementById('gerar-grafico');
+    graficoButton.addEventListener('click', (event) => {
+        getMediaAluno();
+    })
+
     let dataAluno = []
     let dataGrupo = []
     updateGrafico(dataAluno, dataGrupo);
 })
+
 
 function extrairRelatorio(){
     axios({
@@ -31,7 +55,20 @@ function extrairRelatorio(){
 }
 
 function updateGrafico (dataAluno, dataGrupo) {
-    const chartCanvas = document.getElementById('radar-chart').getContext('2d');
+    debugger
+    const chartContainer = document.getElementById('chart-container');
+    let chartCanvas = document.getElementById('radar-chart')
+
+    if (chartCanvas) {
+        chartContainer.removeChild(chartCanvas)
+
+        chartCanvas = document.createElement('canvas')
+        chartCanvas.id = 'radar-chart'
+        chartCanvas.classList.add('radar-chart')
+        chartContainer.appendChild(chartCanvas)
+    }
+
+    chartCanvas = chartCanvas.getContext('2d');
     const radarChart = new Chart(chartCanvas, {
         type: 'radar',
         data: {
@@ -64,4 +101,23 @@ function updateGrafico (dataAluno, dataGrupo) {
             }]
           }
     })
+}
+
+let getMediaAluno = () => {
+    let sprintSelect = document.getElementById('sprint');
+    let alunoSelect = document.getElementById('aluno');
+
+    let formData = new FormData();
+    formData.append('nome', alunoSelect.value);
+    formData.append('sprint', sprintSelect.value);
+
+    axios({
+        method: 'post',
+        url: 'http://localhost:5000/pacer/media',
+        data: formData,
+        headers: {'Content-Type': 'multipart/form-data'}
+    }).then((response) => {
+        updateGrafico(response.data, [])
+    });
+    
 }

@@ -15,9 +15,20 @@ const createOption = (value, text, father) => {
     appendTo(father, option);
 }
 
-const populateSelect = (selectId, optionsList) => {
+const populateSelect = (selectId, optionsList, sameNameAndValue = false) => {
     let select = document.getElementById(`${selectId}`);
     optionsList.forEach((option) => {
-        createOption(option._id, option.nome, select)
+        if (sameNameAndValue) {
+            createOption(option.nome, option.nome, select)
+        } else {
+            createOption(option._id, option.nome, select)
+        }
+    });
+}
+
+const populateSelectArray = (selectId, optionsList) => {
+    let select = document.getElementById(`${selectId}`);
+    optionsList.forEach((option) => {
+        createOption(option, option, select)
     });
 }
