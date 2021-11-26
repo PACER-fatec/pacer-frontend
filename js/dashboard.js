@@ -1,6 +1,6 @@
 window.addEventListener('load', (event) => {
     if (!window.sessionStorage.getItem('logged')) {
-         window.location.href = 'login.html'
+        window.location.href = 'login.html'
     }
 
     axios.get('http://localhost:5000/pacer/sprints')
