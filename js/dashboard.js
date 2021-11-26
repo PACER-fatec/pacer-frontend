@@ -1,7 +1,7 @@
 window.addEventListener('load', (event) => {
-    // if (!window.sessionStorage.getItem('logged')) {
-    //     window.location.href = 'login.html'
-    // }
+    if (!window.sessionStorage.getItem('logged')) {
+         window.location.href = 'login.html'
+    }
 
     axios.get('http://localhost:5000/pacer/sprints')
     .then((res) => {
@@ -55,7 +55,6 @@ function extrairRelatorio(){
 }
 
 function updateGrafico (dataAluno, dataGrupo) {
-    debugger
     const chartContainer = document.getElementById('chart-container');
     let chartCanvas = document.getElementById('radar-chart')
 
@@ -69,6 +68,16 @@ function updateGrafico (dataAluno, dataGrupo) {
     }
 
     chartCanvas = chartCanvas.getContext('2d');
+    var options = {
+        responsive: false,
+        maintainAspectRatio: true,
+        scale: {
+            ticks: {
+                beginAtZero: true,
+                max: 3
+            }
+        }
+    };
     const radarChart = new Chart(chartCanvas, {
         type: 'radar',
         data: {
@@ -99,7 +108,15 @@ function updateGrafico (dataAluno, dataGrupo) {
               pointHoverBackgroundColor: '#fff',
               pointHoverBorderColor: 'rgb(54, 162, 235)'
             }]
-          }
+        },
+        options: {
+            scale: {
+                r: {
+                    min: 0,
+                    max: 3
+                }
+            }
+        }
     })
 }
 
@@ -117,7 +134,7 @@ let getMediaAluno = () => {
         data: formData,
         headers: {'Content-Type': 'multipart/form-data'}
     }).then((response) => {
-        updateGrafico(response.data, [])
+        updateGrafico(response.data.aluno, response.data.grupo)
     });
     
 }
