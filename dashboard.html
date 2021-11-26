@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="./style/dashboard-professor.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="./js/baseScript.js"></script>
         <script src="./js/dashboard.js"></script>
         <script src="./js/uploadAlunos.js"></script>
         <title>PACER Fatec</title>
@@ -43,8 +44,9 @@
                         <select class="select-valor" name="sprint" id="sprint"></select>
                         <label class="label-valor" for="aluno">Aluno:</label>
                         <select class="select-valor" name="aluno" id="aluno"></select>
+                        <button class="radar-chart-button" id="gerar-grafico">Gerar gráfico</button>
                     </div>
-                    <div class="radar-chart-container">
+                    <div class="radar-chart-container" id="chart-container">
                         <canvas id="radar-chart" class="radar-chart"></canvas>
                     </div>
                 </div>
