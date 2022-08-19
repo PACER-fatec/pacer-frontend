@@ -2,7 +2,7 @@ let alunos = []
 
 window.addEventListener('load', (event) => {
     // Faz request p/ backend para pegar a listagem de alunos
-    axios.get('http://localhost:5000/pacer/alunos')
+    axios.get('https://pacerftc-backend.herokuapp.com/pacer/alunos')
     .then((res) => {
         alunos = res.data
         populateSelect('avaliador', alunos);
@@ -49,7 +49,7 @@ const sendEvaluation = () => {
 
     axios({
         method: 'post',
-        url: 'http://localhost:5000/pacer',
+        url: 'https://pacerftc-backend.herokuapp.com/pacer',
         data: formData,
         headers: {'Content-Type': 'multipart/form-data'}
     }).then((response) => {
