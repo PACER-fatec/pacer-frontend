@@ -6,8 +6,5 @@
         "/**": {
             "Access-Control-Allow-Origin": "*"
         }
-    },
-    "routes": {
-        "/": "avaliacao.html"
     }
 }
