@@ -41,7 +41,7 @@ window.addEventListener('load', (event) => {
 function extrairRelatorio(){
     axios({
         method: 'GET',
-        url: 'https://pacerftc-backend.herokuapp.com/pacer/csvfile',
+        url: 'https://cors-anywhere.herokuapp.com/https://pacerftc-backend.herokuapp.com/pacer/csvfile',
         crossDomain: true,
         responseType: 'blob'
     }).then((response) => {
