@@ -8,8 +8,8 @@
         }
     },
     "routes": {
-        "/src/*.html": "avaliacao.html",
-        "/src/*.html": "login.html",
-        "/src/*.html": "dashboard.html"
+        "src/*.html": "avaliacao.html",
+        "src/*.html": "login.html",
+        "src/*.html": "dashboard.html"
     }
 }
