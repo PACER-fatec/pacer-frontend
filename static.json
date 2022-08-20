@@ -1,5 +1,5 @@
 {
-    "root": "public",
+    "root": "src/",
     "clean_urls": true,
     "https_only": true,
     "headers": {
@@ -8,8 +8,8 @@
         }
     },
     "routes": {
-        "/*.html": "avaliacao.html",
-        "/login/**": "login/login.html",
+        "/src/*.html": "avaliacao.html",
+        "/src/**": "login/login.html",
         "/dashboard/**": "dashboard/dashboard.html"
     }
 }
