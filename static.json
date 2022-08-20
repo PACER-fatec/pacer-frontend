@@ -8,6 +8,6 @@
         }
     },
     "routes": {
-        "/src/avaliacao.html": ""
+        "/**": "avaliacao.html"
     }
 }
