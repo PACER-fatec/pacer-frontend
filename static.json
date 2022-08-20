@@ -1,5 +1,5 @@
 {
-    "root": "src/",
+    "root": "./",
     "clean_urls": true,
     "https_only": true,
     "headers": {
@@ -10,6 +10,6 @@
     "routes": {
         "/src/*.html": "avaliacao.html",
         "/src/*.html": "login.html",
-        "/src/*.hmtl": "dashboard.html"
+        "/src/*.html": "dashboard.html"
     }
 }
