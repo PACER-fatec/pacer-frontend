@@ -1,5 +1,5 @@
 {
-    "root": "src/avaliacao.html",
+    "root": "/src/avaliacao.html",
     "clean_urls": true,
     "https_only": true,
     "headers": {
