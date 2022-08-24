@@ -1,7 +1,7 @@
 window.addEventListener('load', (event) => {
-    if (!window.sessionStorage.getItem('logged')) {
+    /*if (!window.sessionStorage.getItem('logged')) {
         window.location.href = 'login.html'
-    }
+    }*/
 
     axios.get('https://pacerftc-backend.herokuapp.com/pacer/sprints')
     .then((res) => {
