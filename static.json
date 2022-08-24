@@ -2,15 +2,11 @@
     "root": "public",
     "clean_urls": true,
     "https_only": true,
-    "headers": {
-        "/**": {
-            "Access-Control-Allow-Origin": "*"
-        }
-    },
+    "headers": {},
     "routes": {
-        "/avaliacao.html": "avaliacao.html",
-        "/login.html*": "login.html",
-        "/dashboard.html": "dashboard.html",
-        "/cadastro.html*": "cadastro.html"
+        "/*.html": "avaliacao.html",
+        "/login/**": "login/login.html",
+        "/dashboard/**": "dashboard/dashboard.html",
+        "/cadastro/**": "cadastro/cadastro.html"
     }
 }
