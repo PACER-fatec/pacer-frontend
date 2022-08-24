@@ -1,6 +1,6 @@
 window.addEventListener('load', (event) => {
 
-    let confirmButton = document.getElementById('button-confirmar');
+    let confirmButton = document.getElementById('button-cadastro');
     confirmButton.addEventListener('click', (event) => {
         confirm()
     })
@@ -9,7 +9,7 @@ window.addEventListener('load', (event) => {
 
 const confirm = () => {
     const senhaInput = document.getElementById('senha');
-    const confirmacaoInput = document.getElementById('senha-confirmacao');
+    const confirmacaoInput = document.getElementById('senhaconf-reg-confirmacao');
     const mensagemErroTemplate = document.getElementById('mensagem');
     mensagemErroTemplate.innerHTML = '';
 
@@ -19,11 +19,19 @@ const confirm = () => {
     }
 
     let formData = new FormData();
+
+    const nomeReg = document.getElementById('nome-reg');
+    const emailReg = document.getElementById('email-reg');
+    const raReg = document.getElementById('ra-reg');
+
+    formData.append('nome', nomeReg.value);
+    formData.append('email', emailReg.value);
+    formData.append('ra', raReg.value);
     formData.append('senha', senhaInput.value);
 
     axios({
         method: 'POST',
-        url: 'https://pacerftc-backend.herokuapp.com/pacer/login/novasenha',
+        url: 'https://pacerftc-backend.herokuapp.com/pacer/cadastro',
         crossDomain: true,
         data: formData,
         headers: {'Content-Type': 'multipart/form-data'}
