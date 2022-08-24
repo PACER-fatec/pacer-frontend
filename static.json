@@ -2,7 +2,11 @@
     "root": "public",
     "clean_urls": true,
     "https_only": true,
-    "headers": {},
+    "headers": {
+        "/**": {
+            "Access-Control-Allow-Origin": "*"
+        }
+    },
     "routes": {
         "/*.html": "avaliacao.html",
         "/login/**": "login/login.html",
