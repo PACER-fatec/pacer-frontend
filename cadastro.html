@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="./style/reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="./style/base.css">
+        <link rel="stylesheet" href="./style/cadastro.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+        <script src="./js/cadastro.js"></script>
+        <title>PACER Fatec</title>
+    </head>
+    <body>
+        <div class="body-container">
+            <div class="main-header">
+                <div>
+                    <span class="main-header-title">PACER</span> Fatec
+                </div>
+                <a class="main-header-link" href="login.html" id='sair'>Login</a>
+            </div>
+            <div class="reg-container">
+                <div class="reg-card">
+                    <div class="reg-cta">Informe seus dados para cadastro:</div>
+                    <label class="name-reg-label" for="nome">Nome</label>
+                    <input class="name-reg-input" name="nome" id="nome-reg" required />
+                    <label class="email-reg-label" for="email">Email</label>
+                    <input class="email-reg-input" name="email" id="email-reg">
+                    <label class="ra-reg-label" for="ra">RA</label>
+                    <input class="ra-reg-input" name="ra" id="ra-reg">
+                    <label class="senha-reg-label" for="senha">Senha</label>
+                    <input class="senha-reg-input" type="password" name="senha" id="senha" required />
+                    <label class="senhaconf-reg-input-label" for="senhaconf-reg-confirmacao">Confirmação de senha</label>
+                    <input class="senhaconf-reg-input" type="password" name="senhaconf-reg-confirmacao" id="senhaconf-reg-confirmacao">
+                    <button class="cadastro-button" id="button-cadastro">Confirmar</button>
+                    <span class="mensagem-erro" style="margin-top: 10px;" id="mensagem"></span>
+                </div>
+            </div>
+        </div>
+    </body>

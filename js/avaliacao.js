@@ -1,9 +1,9 @@
 let alunos = []
 
 window.addEventListener('load', (event) => {
-    if (!window.sessionStorage.getItem('logged')) {
+    /*if (!window.sessionStorage.getItem('logged')) {
         window.location.href = 'login.html'
-    }
+    }*/
 
     // Faz request p/ backend para pegar a listagem de alunos
     axios.get('https://pacerftc-backend.herokuapp.com/pacer/alunos')
@@ -15,6 +15,11 @@ window.addEventListener('load', (event) => {
         console.warn(err)
     })
 
+    let sairButton = document.getElementById('sair');
+    sairButton.addEventListener('click', (event) => {
+        window.sessionStorage.removeItem('logged')
+        window.location.href = 'login.html'
+    })
 
     let evaluatorSelect = document.getElementById('avaliador');
 
