@@ -1,6 +1,10 @@
 let alunos = []
 
 window.addEventListener('load', (event) => {
+    if (!window.sessionStorage.getItem('logged')) {
+        window.location.href = 'login.html'
+    }
+
     // Faz request p/ backend para pegar a listagem de alunos
     axios.get('https://pacerftc-backend.herokuapp.com/pacer/alunos')
     .then((res) => {
