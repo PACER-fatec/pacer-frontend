@@ -23,7 +23,7 @@ const confirm = () => {
     const nomeReg = document.getElementById('nome-reg');
     const emailReg = document.getElementById('email-reg');
     const raReg = document.getElementById('ra-reg');
-    const span = document.getElementById('mensagem');
+    const mensagemSpan = document.getElementById('mensagem');
 
     formData.append('nome', nomeReg.value);
     formData.append('email', emailReg.value);
