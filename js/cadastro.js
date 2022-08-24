@@ -23,7 +23,7 @@ const confirm = () => {
     const nomeReg = document.getElementById('nome-reg');
     const emailReg = document.getElementById('email-reg');
     const raReg = document.getElementById('ra-reg');
-    const span = document.getElementById('mensagem');
+    const mensagemSpan = document.getElementById('mensagem');
 
     formData.append('nome', nomeReg.value);
     formData.append('email', emailReg.value);
@@ -37,6 +37,15 @@ const confirm = () => {
         headers: {'Content-Type': 'multipart/form-data' }
     }).then((response) => {
         mensagemSpan.innerHTML = response.data
-        changeMessageColor(mensagemSpan.innerHTML); 
+        changeMessageColor(mensagemSpan.innerHTML);
     });
+}
+
+function changeMessageColor(mensagem) {
+    const span = document.getElementById('mensagem');
+    if(mensagem == 'Cadastro concluído!') {
+        span.style.color = "#32CD32"
+    } else {
+        span.style.color = '#B22222'
+    }
 }
