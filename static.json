@@ -8,9 +8,9 @@
         }
     },
     "routes": {
-        "/*": "avaliacao.html",
-        "/*": "login.html",
-        "/*": "dashboard.html",
-        "/*": "cadastro.html"
+        "/avaliacao.html": "avaliacao.html",
+        "/login.html*": "login.html",
+        "/dashboard.html": "dashboard.html",
+        "/cadastro.html*": "cadastro.html"
     }
 }
