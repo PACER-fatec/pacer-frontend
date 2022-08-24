@@ -23,6 +23,7 @@ const confirm = () => {
     const nomeReg = document.getElementById('nome-reg');
     const emailReg = document.getElementById('email-reg');
     const raReg = document.getElementById('ra-reg');
+    const span = document.getElementById('mensagem');
 
     formData.append('nome', nomeReg.value);
     formData.append('email', emailReg.value);
@@ -35,6 +36,7 @@ const confirm = () => {
         data: formData,
         headers: {'Content-Type': 'multipart/form-data' }
     }).then((response) => {
-        console.log("Usuario criado!")
+        mensagemSpan.innerHTML = response.data
+        changeMessageColor(mensagemSpan.innerHTML); 
     });
 }
