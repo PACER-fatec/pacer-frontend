@@ -1,11 +1,5 @@
 {
-    "root": "public",
+    "root": "/dist",
     "clean_urls": true,
     "https_only": true,
-    "routes": {
-        "/*.html": "avaliacao.html",
-        "/login/**": "login/login.html",
-        "/dashboard/**": "dashboard/dashboard.html",
-        "/cadastro/**": "cadastro/cadastro.html"
-    }
 }
