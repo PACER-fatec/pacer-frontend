@@ -1,6 +1,7 @@
 window.addEventListener('load', (event) => {
     if (window.sessionStorage.getItem('logged')) {
         window.location.href = 'dashboard.html'
+    //TO DO: Redirecionar usuário para a pagina inicial da ROLE correta.
     }
 
     let loginButton = document.getElementById('button-login');
@@ -29,6 +30,7 @@ const login = () => {
     }).then((response) => {
         window.sessionStorage.setItem('logged', 'true')
         window.location.href = response.data.primeiroAcesso ? "primeiro-acesso.html" : "dashboard.html";
+        //TO DO: Redirecionar usuário para a pagina inicial da ROLE correta.
     }).catch((error) => {
         mensagemErroTemplate.innerHTML = 'Nome ou senha incorretos!';
     });
