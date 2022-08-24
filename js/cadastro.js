@@ -30,12 +30,11 @@ const confirm = () => {
     formData.append('senha', senhaInput.value);
 
     axios({
-        method: 'POST',
+        method: 'post',
         url: 'https://pacerftc-backend.herokuapp.com/pacer/cadastro',
-        crossDomain: true,
         data: formData,
-        headers: {'Content-Type': 'multipart/form-data'}
+        headers: {'Content-Type': 'multipart/form-data' }
     }).then((response) => {
-        window.location.href = 'dashboard.html'
+        console.log("Usuario criado!")
     });
 }
