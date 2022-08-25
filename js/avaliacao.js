@@ -1,12 +1,12 @@
 let alunos = []
 
 window.addEventListener('load', (event) => {
-    /*if (!window.sessionStorage.getItem('logged')) {
+    if (!window.sessionStorage.getItem('logged')) {
         window.location.href = 'login.html'
-    }*/
+    }
 
     // Faz request p/ backend para pegar a listagem de alunos
-    axios.get('https://pacerftc-backend.herokuapp.com/pacer/alunos')
+    axios.get('http://localhost:5000/pacer/alunos')
     .then((res) => {
         alunos = res.data
         populateSelect('avaliador', alunos);
@@ -18,6 +18,7 @@ window.addEventListener('load', (event) => {
     let sairButton = document.getElementById('sair');
     sairButton.addEventListener('click', (event) => {
         window.sessionStorage.removeItem('logged')
+        window.sessionStorage.removeItem('ROLE')
         window.location.href = 'login.html'
     })
 
@@ -58,7 +59,7 @@ const sendEvaluation = () => {
 
     axios({
         method: 'post',
-        url: 'https://pacerftc-backend.herokuapp.com/pacer',
+        url: 'http://localhost:5000/pacer',
         data: formData,
         headers: {'Content-Type': 'multipart/form-data'}
     }).then((response) => {
