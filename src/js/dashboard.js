@@ -1,5 +1,6 @@
 window.addEventListener('load', (event) => {
-    if (!window.sessionStorage.getItem('logged') && window.sessionStorage.getItem('ROLE') != 'ROLE_PROFESSOR') {
+    if (!window.sessionStorage.getItem('logged')
+    && window.sessionStorage.getItem('ROLE') == 'ROLE_ALUNO') {
         window.location.href = 'login.html'
     }
 
