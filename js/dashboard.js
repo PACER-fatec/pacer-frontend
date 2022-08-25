@@ -3,7 +3,7 @@ window.addEventListener('load', (event) => {
         window.location.href = 'login.html'
     }
 
-    axios.get('http://localhost:5000/pacer/sprints')
+    axios.get('https://pacerftc-backend.herokuapp.com/pacer/sprints')
     .then((res) => {
         sprints = res.data
         populateSelectArray('sprint', sprints);
@@ -12,7 +12,7 @@ window.addEventListener('load', (event) => {
         console.warn(err)
     })
 
-    axios.get('http://localhost:5000/pacer/alunos')
+    axios.get('https://pacerftc-backend.herokuapp.com/pacer/alunos')
     .then((res) => {
         alunos = res.data
         populateSelect('aluno', alunos, true);
@@ -41,7 +41,7 @@ window.addEventListener('load', (event) => {
 function extrairRelatorio(){
     axios({
         method: 'GET',
-        url: 'http://localhost:5000/pacer/csvfile',
+        url: 'https://pacerftc-backend.herokuapp.com/pacer/csvfile',
         crossDomain: true,
         responseType: 'blob'
     }).then((response) => {
@@ -130,7 +130,7 @@ let getMediaAluno = () => {
 
     axios({
         method: 'post',
-        url: 'http://localhost:5000/pacer/media',
+        url: 'https://pacerftc-backend.herokuapp.com/pacer/media',
         data: formData,
         headers: {'Content-Type': 'multipart/form-data'}
     }).then((response) => {
