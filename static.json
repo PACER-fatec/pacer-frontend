@@ -1,8 +1,5 @@
 {
     "root": "./",
     "clean_urls": true,
-    "https_only": true,
-    "routes": {
-        "/*.html": "login.html"
-    }
+    "https_only": true
 }
