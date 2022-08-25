@@ -32,7 +32,7 @@ const confirm = () => {
 
     axios({
         method: 'post',
-        url: 'https://pacerftc-backend.herokuapp.com/pacer/cadastro',
+        url: 'http://localhost:5000/pacer/cadastro',
         data: formData,
         headers: {'Content-Type': 'multipart/form-data' }
     }).then((response) => {
