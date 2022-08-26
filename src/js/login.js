@@ -23,12 +23,16 @@ const login = () => {
         headers: {'Content-Type': 'multipart/form-data'}
     }).then((response) => {
         window.sessionStorage.setItem('logged', 'true')
+        window.sessionStorage.setItem('nome', response.data['nome'])
+        window.sessionStorage.setItem('email', response.data['email'])
+        window.sessionStorage.setItem('ra', response.data['ra'])
+        window.sessionStorage.setItem('ROLE', response.data['ROLE'])
         if (response.data['ROLE'] == 'ROLE_PROFESSOR') {
             window.sessionStorage.setItem('ROLE', 'ROLE_PROFESSOR')
             window.location.href = "dashboard.html";
         } else {
             window.sessionStorage.setItem('ROLE', 'ROLE_ALUNO')
-            window.location.href = "avaliacao.html";
+            window.location.href = "index_a.html";
         }
     }).catch(() => {
         mensagemErroTemplate.innerHTML = 'Email ou senha incorretos!';
