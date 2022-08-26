@@ -3,6 +3,6 @@
     "clean_urls": true,
     "https_only": true,
     "routes": {
-        "/*.html": "src/login.html"
+        "/*.html": "./src/login.html"
     }
 }
