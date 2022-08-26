@@ -1,5 +1,5 @@
 {
-    "root": "src/",
+    "root": "src/login.html",
     "clean_urls": true,
     "https_only": true
 }
