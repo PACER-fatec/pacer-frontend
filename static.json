@@ -3,6 +3,6 @@
     "clean_urls": true,
     "https_only": true,
     "routes": {
-        "/": "https://www.google.com"
+        "/**": "https://www.google.com"
     }
 }
