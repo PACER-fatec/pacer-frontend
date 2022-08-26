@@ -1,8 +1,8 @@
 {
-    "root": "src/",
+    "root": "src",
     "clean_urls": true,
     "https_only": true,
     "routes": {
-        "/*": "https://www.google.com"
+        "/*": "login.html"
     }
 }
