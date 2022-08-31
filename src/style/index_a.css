@@ -18,3 +18,13 @@
 .student-info {
     margin-bottom: 5px
 }
+
+.criar-grupo-button {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    background-color: slategray;
+    color: white;
+    border: none;
+    box-shadow: 2px 2px 4px #dfe2e6;
+    padding: 8px 16px;
+}

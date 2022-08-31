@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="./style/reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="./style/base.css">
+        <link rel="stylesheet" href="./style/cadastroGrupo.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+        <script src="./js/cadastroGrupo.js"></script>
+        <title>PACER Fatec</title>
+    </head>
+    <body>
+        <div class="body-container">
+            <div class="main-header">
+                <div>
+                    <span class="main-header-title">PACER</span> Fatec - Criação de grupos
+                </div>
+            </div>
+            <div class="reg-container">
+                <div>
+                    <form class="reg-card" action="javascript:criarGrupo()" method="post">
+                        <div class="reg-cta">Informe os dados para criação do grupo:</div>
+                        <label class="name-reg-label" for="nome">Nome do grupo:</label>
+                        <input class="name-reg-input" name="nome" id="nome-reg" required />
+                        <label class="email-reg-label" for="email1">e-mail do 1º Integrante: </label>
+                        <input class="email-reg-input" name="email1" id="email1-reg">
+                        <label class="email-reg-label" for="email2">e-mail do 2º Integrante: </label>
+                        <input class="email-reg-input" name="email2" id="email2-reg">
+                        <label class="email-reg-label" for="email3">e-mail do 3º Integrante: </label>
+                        <input class="email-reg-input" name="email3" id="email3-reg">
+                        <label class="email-reg-label" for="email4">e-mail do 4º Integrante: </label>
+                        <input class="email-reg-input" name="email4" id="email4-reg">
+                        <label class="email-reg-label" for="email5">e-mail do 5º Integrante: </label>
+                        <input class="email-reg-input" name="email5" id="email5-reg">
+                        <br>
+                        <div class="skills">
+                            <label class="skill-reg-label" for="skill1">1ª Skill:</label>
+                            <select class="skill-reg-input" name="skill1" id="skill1">
+                                <option>Autonomia</option>
+                                <option>Entrega de resultados</option>
+                            </select>
+
+                            <label class="skill-reg-label" for="skill2">2ª Skill:</label>
+                            <select class="skill-reg-input" name="skill2" id="skill2">
+                                <option>Autonomia</option>
+                                <option>Entrega de resultados</option>
+                            </select>
+                        </div>
+                        
+                        <div class="skills">
+                            <label class="skill-reg-label" for="skill3">3ª Skill:</label>
+                            <select class="skill-reg-input" name="skill3" id="skill3">
+                                <option>Autonomia</option>
+                                <option>Entrega de resultados</option>
+                            </select>
+                            
+                            <label class="skill-reg-label" for="skill4">4ª Skill:</label>
+                            <select class="skill-reg-input" name="skill4" id="skill4">
+                                <option>Autonomia</option>
+                                <option>Entrega de resultados</option>
+                            </select>
+                        </div>   
+                        
+                        <div class="skills">
+                            <label class="skill-reg-label" for="skill5">5ª Skill:</label>
+                            <select class="skill-reg-input" name="skill5" id="skill5">
+                                <option>Autonomia</option>
+                                <option>Entrega de resultados</option>
+                            </select>
+
+                            <label class="skill-reg-label" for="materia">Matéria:</label>
+                            <select class="materia-reg-input" name="materia" id="materia">
+                                <option>Matéria 1</option>
+                                <option>Matéria para testar o tamanho do select</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="cadastro-button" id="button-cadastro">Criar grupo</button>
+                        <span class="mensagem" style="margin-top: 10px;" id="mensagem"></span>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
