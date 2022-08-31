@@ -24,8 +24,7 @@ window.addEventListener('load', (event) => {
 
     let sairButton = document.getElementById('sair');
     sairButton.addEventListener('click', (event) => {
-        window.sessionStorage.removeItem('logged')
-        window.sessionStorage.removeItem('ROLE')
+        window.sessionStorage.clear()
         window.location.href = 'login.html'
     })
 

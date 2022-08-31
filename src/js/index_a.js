@@ -18,3 +18,9 @@ window.addEventListener('load', (event) => {
 
 })
 
+function cadastroGrupoPopup(){
+    varWindow = window.open (
+    'cadastroGrupo.html',
+    'pagina',
+    "width=1500, height=700, left=300, top=25, resizeble=no, scrollbars=no, menubar=no, status=no, titlebar=no, toolbar=no");
+}

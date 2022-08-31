@@ -1,0 +1,68 @@
+.reg-container {
+    margin: 0 auto;
+    height: 90vh;
+    width: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reg-card {
+    min-width: 650px;
+    display: flex;
+    flex-direction: column;
+    padding: 35px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #dfe2e6;
+}
+
+.reg-cta {
+    text-align: center;
+    font-weight: 900;
+    color: #2367d8;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.skills {
+    margin: 10px;
+}
+
+.skill-reg-label {
+    margin-right: 2px;
+}
+
+.skill-reg-input {
+    margin-right: 10px;
+}
+
+.name-reg-label {
+    margin-bottom: 5px;
+}
+
+.email-reg-label {
+    margin-bottom: 5px;
+}
+
+.name-reg-input {
+    margin-bottom: 10px;
+}
+
+.email-reg-input {
+    margin-bottom: 10px;
+}
+
+.cadastro-button {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    background-color: slategray;
+    color: white;
+    border: none;
+    box-shadow: 2px 2px 4px #dfe2e6;
+    padding: 8px 16px;
+    margin-top: 15px;
+}
+
+.mensagem-erro {
+    color: red;
+}
