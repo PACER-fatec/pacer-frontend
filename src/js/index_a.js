@@ -6,6 +6,7 @@ window.addEventListener('load', (event) => {
     }
 
     document.getElementById("student-info-nome").innerHTML +=  window.sessionStorage.getItem('nome')
+    email = window.sessionStorage.getItem('email')
     document.getElementById("student-info-email").innerHTML +=  window.sessionStorage.getItem('email')
     document.getElementById("student-info-ra").innerHTML +=  window.sessionStorage.getItem('ra')
 
@@ -14,6 +15,28 @@ window.addEventListener('load', (event) => {
         window.sessionStorage.removeItem('logged')
         window.sessionStorage.removeItem('ROLE')
         window.location.href = 'login.html'
+    })
+
+    let lista = document.getElementById("listaGrupos");
+
+    axios.get('https://pacerftc-backend.herokuapp.com/pacer/gruposAlunoLogado', {
+        params: {'email': email}
+    })
+    .then((res) => {
+        res.data.forEach(element => {
+            console.log("entrou!")
+            let li = document.createElement("li")
+            if (element != null) {
+                li.innerText = element
+            }
+            else {
+                li.innerText = 'Nenhum grupo encontrado!'
+            }
+            lista.appendChild(li)
+        })
+    })
+    .catch((err) => {
+        console.warn(err)
     })
 
 })
