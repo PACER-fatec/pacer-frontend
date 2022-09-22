@@ -28,6 +28,8 @@ window.addEventListener('load', (event) => {
             let li = document.createElement("li")
             if (element != null) {
                 li.innerText = element
+                li.setAttribute('onclick', "location.href='http://localhost:5000/pacer/grupoSelecionado?grupo=" + element + "';")
+                li.setAttribute('class', 'groupList')
             }
             else {
                 li.innerText = 'Nenhum grupo encontrado!'
