@@ -1,3 +1,7 @@
+window.onclick = e => {
+    window.sessionStorage.setItem("grupoSelecionado", e.target.getAttribute("value"))
+} 
+
 window.addEventListener('load', (event) => {
 
     if (!window.sessionStorage.getItem('logged') 
@@ -23,24 +27,27 @@ window.addEventListener('load', (event) => {
         params: {'email': email}
     })
     .then((res) => {
+        var i = 0
         res.data.forEach(element => {
-            console.log("entrou!")
             let li = document.createElement("li")
             if (element != null) {
                 li.innerText = element
-                li.setAttribute('onclick', "location.href='http://localhost:5000/pacer/grupoSelecionado?grupo=" + element + "';")
                 li.setAttribute('class', 'groupList')
+                li.setAttribute('id', 'group ' + i)
+                link = "https://pacerftc-backend.herokuapp.com/pacer/grupoSelecionado?grupo=" + element
+                li.setAttribute('value', "https://pacerftc-backend.herokuapp.com/pacer/grupoSelecionado?grupo=" + element)
+                li.setAttribute('onclick', "location.href='../src/avaliacao.html'")
             }
             else {
                 li.innerText = 'Nenhum grupo encontrado!'
             }
             lista.appendChild(li)
+            i++
         })
     })
-    .catch((err) => {
+    .catch((err) => {   
         console.warn(err)
     })
-
 })
 
 function cadastroGrupoPopup(){

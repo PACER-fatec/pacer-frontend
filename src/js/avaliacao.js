@@ -6,10 +6,18 @@ window.addEventListener('load', (event) => {
     }
 
     // Faz request p/ backend para pegar a listagem de alunos
-    axios.get('https://pacerftc-backend.herokuapp.com/pacer/alunos')
+    axios.get(window.sessionStorage.getItem('grupoSelecionado'))
     .then((res) => {
         alunos = res.data
-        populateSelect('avaliador', alunos);
+        alunos.forEach((aluno) => {
+            if (aluno != "")
+            {
+                console.log(aluno)
+                populateSelect('avaliador', aluno);
+                populateSelect('avaliado', aluno);
+            }
+        });
+        window.sessionStorage.removeItem('grupoSelecionado')
     })
     .catch((err) => {
         console.warn(err)
@@ -24,13 +32,6 @@ window.addEventListener('load', (event) => {
 
     let evaluatorSelect = document.getElementById('avaliador');
 
-    evaluatorSelect.addEventListener('change', (event) => {
-        // Filtra alunos do mesmo gtupo e popula o segundo select
-        clearAssessedSelect();
-        let avaliador = alunos.filter((a) => a._id === event.target.value)[0];
-        let avaliadoList = alunos.filter((a) => a.grupo === avaliador.grupo && a._id !== avaliador._id);
-        populateSelect('avaliado', avaliadoList);
-    });
 });
 
 const clearAssessedSelect = () => {
