@@ -6,8 +6,26 @@ window.addEventListener('load', (event) => {
             alert("Você precisa estar logado como aluno para acessar esta página!")
             window.sessionStorage.clear()
             window.close()
+    }    
+
+    if (window.sessionStorage.getItem("ROLE") == 'ROLE_ALUNO')
+    {
+        document.getElementById("email1-reg").value = window.sessionStorage.getItem('email')
+        document.getElementById("email1-reg").disabled = true
     }
 
+
+
+    axios.get('https://pacerftc-backend.herokuapp.com/pacer/skills', {}).then((res) => {
+        skills = res.data
+        skills.forEach((topico) => {
+            populateSelectArray('skill1', topico.Skills)
+            populateSelectArray('skill2', topico.Skills)
+            populateSelectArray('skill3', topico.Skills)
+            populateSelectArray('skill4', topico.Skills)
+            populateSelectArray('skill5', topico.Skills)
+        });
+    })
 })
 
 const criarGrupo = () => {
@@ -43,7 +61,7 @@ const criarGrupo = () => {
         method: 'post',
         url: 'https://pacerftc-backend.herokuapp.com/pacer/cadastrarGrupo',
         data: formData,
-        headers: {'Content-Type': 'application/json' }
+        headers: {'Content-Type': 'application/https://pacerftc-backend.herokuapp.com' }
     }).then((response) => {
         mensagemErroTemplate.innerHTML = response.data
         changeMessageColor(mensagemErroTemplate.innerHTML); 
