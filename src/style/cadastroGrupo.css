@@ -1,14 +1,14 @@
 .reg-container {
     margin: 0 auto;
-    height: 90vh;
-    width: 90vh;
+    height: 100vh;
+    width: 50vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .reg-card {
-    min-width: 650px;
+    min-width: 450px;
     display: flex;
     flex-direction: column;
     padding: 35px;
