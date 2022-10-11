@@ -1,21 +1,14 @@
 .student-form-container {
-    padding: 10px 105px;
+    padding: 1% 22px;
     display: flex;
+    border-bottom: 2px solid black;
 }
 
 .student-form {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
-    width: 25%;
-}
-
-.student-form-label {
-    padding-bottom: 5px;
-}
-
-.student-form-value {
-    margin-bottom: 15px;
+    width: 100%;
 }
 
 .student-form-input-label-group {
@@ -23,10 +16,15 @@
     width: 100%;
 }
 
+.student-form-input-label-group-sprint {
+    display: flex;
+    width: 50%;
+}
+
 .student-form-input-label {
     display: flex;
     flex-direction: column;
-    padding-right: 15px;
+    padding-right: 2px;
 }
 
 .student-form-button {

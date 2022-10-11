@@ -27,15 +27,19 @@
             <div class="student-form-container">
                 <form class="student-form" action="javascript:sendEvaluation()" method="post">
 
-                    <label class="student-form-label" for="sprint">Sprint</label>
-                    <select class="student-form-value" name="sprint" id="sprint">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                    </select>
+                    <div class="student-form-input-label-group-sprint">
+                        <div class="student-form-input-label">
+                            <label class="student-form-label" for="sprint">Sprint</label>
+                            <select class="student-form-value" name="sprint" id="sprint">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+                        </div>
+                    </div>
 
                     <div class="student-form-input-label-group">
                         <div class="student-form-input-label">
@@ -51,186 +55,216 @@
                         </div>
                     </div>
 
-                    <label class="student-form-label" for="proatividade">Proatividade</label>
-                    <select class="student-form-value" name="proatividade" id="proatividade">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                    
-                    <label class="student-form-label" for="autonomia">Autonomia</label>
-                    <select class="student-form-value" name="autonomia" id="autonomia">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
+                    <div class="student-form-input-label-group">
+                        <div class="student-form-input-label">
+                            <label class="student-form-label" for="entrega-resultados">skill numero 1</label>
+                            <select class="student-form-value" name="entrega-resultados" id="entrega-resultados">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                    </div>
 
-                    <label class="student-form-label" for="colaboracao">Colaboração</label>
-                    <select class="student-form-value" name="colaboracao" id="colaboracao">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
+                    <div class="student-form-input-label-group">
+                        <div class="student-form-input-label">
+                            <label class="student-form-label" for="proatividade">skill numero 2</label>
+                            <select class="student-form-value" name="proatividade" id="proatividade">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                    </div>
 
-                    <label class="student-form-label" for="entrega-resultados">Entrega de Resultados</label>
-                    <select class="student-form-value" name="entrega-resultados" id="entrega-resultados">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
+                    <div class="student-form-input-label-group">
+                        <div class="student-form-input-label">
+                            <label class="student-form-label" for="autonomia">skill numero 3</label>
+                            <select class="student-form-value" name="autonomia" id="autonomia">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="student-form-input-label-group">
+                        <div class="student-form-input-label">
+                            <label class="student-form-label" for="colaboracao">skill numero 4</label>
+                            <select class="student-form-value" name="colaboracao" id="colaboracao">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="student-form-input-label-group">
+                        <div class="student-form-input-label">
+                            <label class="student-form-label" for="entrega-resultados">skill numero 5</label>
+                            <select class="student-form-value" name="entrega-resultados" id="entrega-resultados">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                    </div>
 
                     <button type="submit" class="student-form-button">Enviar</button>
                     <span style="margin-top: 10px;" id="mensagem"></span>
                 </form>
-                <div class="pacer-exemplo-container">
-                    <div class="pacer-exemplo-session">
-                        <h3 class="pacer-exemplo-title">Proatividade</h3>
-                        <div class="pacer-exemplo-group">
-                            <span class="pacer-exemplo-subtitle">0 - Reativo</span>
-                            <ul class="pacer-exemplo-list">
-                                <li>Não tem iniciativa alguma, fica esperando alguém dizer o que fazer ou que o problema apareça;</li>
-                                <li>Não observa os próximos passos do planejamento;</li>
-                            </ul>
-                            <span class="pacer-exemplo-exemplo">Exemplo:</span> Está vendo o que está errado e não se move para ajudar.
-                        </div>
-                        <div class="pacer-exemplo-group">
-                            <span class="pacer-exemplo-subtitle">1 - Desfocado</span>
-                            <ul class="pacer-exemplo-list">
-                                <li>Pega muitas atividades gerais e não inicia nenhuma devidamente;</li>
-                                <li>Mesmo nas tarefas mais simples tem respostas lentas;</li>
-                            </ul>
-                            <span class="pacer-exemplo-exemplo">Exemplo:</span> Quando termina sua atividade inicial, fica quieto esperando o final da sprint.
-                        </div>
-                        <div class="pacer-exemplo-group">
-                            <span class="pacer-exemplo-subtitle">2 - Ativo</span>
-                            <ul class="pacer-exemplo-list">
-                                <li>Tenta pegar as tarefas mais difíceis sempre que possível;</li>
-                                <li>Fundamental para alcançar a meta da sprint;</li>
-                                <li>Pode se enroscar em pequenos problemas não previstos;</li>
-                            </ul>
-                            <span class="pacer-exemplo-exemplo">Exemplo:</span> Pega uma tarefa mas eventualmente subestima sua complexidade.
-                        </div>
-                        <div class="pacer-exemplo-group">
-                            <span class="pacer-exemplo-subtitle">3 - Proativo</span>
-                            <ul class="pacer-exemplo-list">
-                                <li>Foco nas tarefas mais valiosas;</li>
-                                <li>Além da iniciativa, evita problemas antecipadamente;</li>
-                                <li>Altíssima produtividade, foco em uma tarefa por vez e sempre bem feita;</li>
-                            </ul>
-                            <span class="pacer-exemplo-exemplo">Exemplo:</span> Pega uma tarefa e avalia precisamente sua complexidade
-                        </div>
+
+                <div class="underline"></div>
+            </div>
+            <div class="pacer-exemplo-container">
+                <div class="pacer-exemplo-session">
+                    <h3 class="pacer-exemplo-title">Proatividade</h3>
+                    <div class="pacer-exemplo-group">
+                        <span class="pacer-exemplo-subtitle">0 - Reativo</span>
+                        <ul class="pacer-exemplo-list">
+                            <li>Não tem iniciativa alguma, fica esperando alguém dizer o que fazer ou que o problema apareça;</li>
+                            <li>Não observa os próximos passos do planejamento;</li>
+                        </ul>
+                        <span class="pacer-exemplo-exemplo">Exemplo:</span> Está vendo o que está errado e não se move para ajudar.
                     </div>
-                    <div class="pacer-exemplo-session">
-                        <h3 class="pacer-exemplo-title">Autonomia</h3>
-                        <div class="pacer-exemplo-group">
-                            <span class="pacer-exemplo-subtitle">0 - Dirigido</span>
-                            <ul class="pacer-exemplo-list">
-                                <li>Não consegue/não quer iniciar as suas atividades;</li>
-                                <li>Sempre precisa de alguém ao seu lado para progredir nas atividades;</li>
-                            </ul>
-                            <span class="pacer-exemplo-exemplo">Exemplo:</span> Pessoa que tem uma tarefa na mão, mas vai encerrar a sprint sem conclusão.
-                        </div>
-                        <div class="pacer-exemplo-group">
-                            <span class="pacer-exemplo-subtitle">1 - Gerido</span>
-                            <ul class="pacer-exemplo-list">
-                                <li>Demora demais para iniciar as atividades;</li>
-                                <li>Demora para perceber que precisa de ajuda;</li>
-                                <li>Demora para entender o que tem que ser estudado;</li>
-                                <li>Só avança quando alguém lhe diz exatamente o que deve ser feito;</li>
-                            </ul>
-                            <span class="pacer-exemplo-exemplo">Exemplo:</span> Sabe como resolver uma tarefa, mas só avança após a instrução de alguém.
-                        </div>
-                        <div class="pacer-exemplo-group">
-                            <span class="pacer-exemplo-subtitle">2 - Treinado</span>
-                            <ul class="pacer-exemplo-list">
-                                <li>Recorre a experiências descritas por alguém antes de tomar as atitudes;</li>
-                                <li>Repete passos buscando os mesmos resultados;</li>
-                                <li>Pouca capacidade criativa;</li>
-                            </ul>
-                            <span class="pacer-exemplo-exemplo">Exemplo:</span> Uma vez com tarefa atribuida, somente resolve problemas na forma com a qual foi preparado.
-                        </div>
-                        <div class="pacer-exemplo-group">
-                            <span class="pacer-exemplo-subtitle">3 - Autogestão</span>
-                            <ul class="pacer-exemplo-list">
-                                <li>Sempre assume as suas responsabilidades com proatividade;</li>
-                                <li>Suas estimativas de prazo são precisas;</li>
-                                <li>Capacidade analítica/crítica dos desafios que se apresentam;</li>
-                            </ul>
-                            <span class="pacer-exemplo-exemplo">Exemplo:</span> Faz as perguntas certas, no momento certo para as pessoas certas.
-                        </div>
+                    <div class="pacer-exemplo-group">
+                        <span class="pacer-exemplo-subtitle">1 - Desfocado</span>
+                        <ul class="pacer-exemplo-list">
+                            <li>Pega muitas atividades gerais e não inicia nenhuma devidamente;</li>
+                            <li>Mesmo nas tarefas mais simples tem respostas lentas;</li>
+                        </ul>
+                        <span class="pacer-exemplo-exemplo">Exemplo:</span> Quando termina sua atividade inicial, fica quieto esperando o final da sprint.
                     </div>
-                    <div class="pacer-exemplo-session">
-                        <h3 class="pacer-exemplo-title">Colaboração</h3>
-                        <div class="pacer-exemplo-group">
-                            <span class="pacer-exemplo-subtitle">0 - Ausente</span>
-                            <ul class="pacer-exemplo-list">
-                                <li>Não aparece nas reuniões;</li>
-                                <li>Não se interessa pelo projeto;</li>
-                            </ul>
-                        </div>
-                        <div class="pacer-exemplo-group">
-                            <span class="pacer-exemplo-subtitle">1 - Cooperativo</span>
-                            <ul class="pacer-exemplo-list">
-                                <li>Preocupa-se com a organização, contudo não cumpre seu papel;</li>
-                                <li>Provê informação, mas não faz uma comunicação efetiva;</li>
-                                <li>Toma decisões individualmente, mas não em equipe;</li>
-                            </ul>
-                            <span class="pacer-exemplo-exemplo">Exemplo:</span> Ficou responsável pela tarefa X. E a fez, mas nada se integra ao dele.
-                        </div>
-                        <div class="pacer-exemplo-group">
-                            <span class="pacer-exemplo-subtitle">2 - Coordenado</span>
-                            <ul class="pacer-exemplo-list">
-                                <li>Compartilha as informaçoes e segue bem os papéis definidos;</li>
-                                <li>Comunica-se com frequência;</li>
-                                <li>Compartilha decisões tomadas;</li>
-                            </ul>
-                            <span class="pacer-exemplo-exemplo">Exemplo:</span> Acontecem erros mas devido a boa comunicação, são resolvidos rapidamente.
-                        </div>
-                        <div class="pacer-exemplo-group">
-                            <span class="pacer-exemplo-subtitle">3 - Colaborativo</span>
-                            <ul class="pacer-exemplo-list">
-                                <li>A equipe age como se fose um único organismo;</li>
-                                <li>A comunicação é prioridade e sempre remete confiaça a todos;</li>
-                                <li>Decisões geram consenso e compartilham ideias e recursos;</li>
-                            </ul>
-                        </div>
+                    <div class="pacer-exemplo-group">
+                        <span class="pacer-exemplo-subtitle">2 - Ativo</span>
+                        <ul class="pacer-exemplo-list">
+                            <li>Tenta pegar as tarefas mais difíceis sempre que possível;</li>
+                            <li>Fundamental para alcançar a meta da sprint;</li>
+                            <li>Pode se enroscar em pequenos problemas não previstos;</li>
+                        </ul>
+                        <span class="pacer-exemplo-exemplo">Exemplo:</span> Pega uma tarefa mas eventualmente subestima sua complexidade.
                     </div>
-                    <div class="pacer-exemplo-session">
-                        <h3 class="pacer-exemplo-title">Entrega de Resultados</h3>
-                        <div class="pacer-exemplo-group">
-                            <span class="pacer-exemplo-subtitle">0 - Não há entregas</span>
-                            <ul class="pacer-exemplo-list">
-                                <li>Não ocorrem entregas de sucesso;</li>
-                                <li>Existem pontos que aparentemente não serão resolvidos no tempo restante;</li>
-                            </ul>
-                            <span class="pacer-exemplo-exemplo">Exemplo:</span> Entrega individual comprometeu a entrega da equipe ou simplesmente não entregou nada.
-                        </div>
-                        <div class="pacer-exemplo-group">
-                            <span class="pacer-exemplo-subtitle">1 - Entregas Duvidosas</span>
-                            <ul class="pacer-exemplo-list">
-                                <li>Existem dúvidas se a entrega não coloca em risco o projeto;</li>
-                                <li>Ações urgentes precisam ser tomadas para garantir a entrega;</li>
-                            </ul>
-                            <span class="pacer-exemplo-exemplo">Exemplo:</span> Não dá para encerrar a sprint sem conferir cada detalhe da entrega.
-                        </div>
-                        <div class="pacer-exemplo-group">
-                            <span class="pacer-exemplo-subtitle">2 - Entregas Confiáveis</span>
-                            <ul class="pacer-exemplo-list">
-                                <li>O sucesso é provável. Contudo é necessário uma atenção constante para garantir que riscos não ameacem o projeto;</li>
-                            </ul>
-                            <span class="pacer-exemplo-exemplo">Exemplo:</span> As entregas de Fulano geralmente são bem feitas. Mas é melhor conferir.
-                        </div>
-                        <div class="pacer-exemplo-group">
-                            <span class="pacer-exemplo-subtitle">3 - Entregas Perfeitas</span>
-                            <ul class="pacer-exemplo-list">
-                                <li>Entregas completas, sem erros, bem documentadas;</li>
-                            </ul>
-                            <span class="pacer-exemplo-exemplo">Exemplo:</span> Entregas que não precisam de considerações.
-                        </div>
+                    <div class="pacer-exemplo-group">
+                        <span class="pacer-exemplo-subtitle">3 - Proativo</span>
+                        <ul class="pacer-exemplo-list">
+                            <li>Foco nas tarefas mais valiosas;</li>
+                            <li>Além da iniciativa, evita problemas antecipadamente;</li>
+                            <li>Altíssima produtividade, foco em uma tarefa por vez e sempre bem feita;</li>
+                        </ul>
+                        <span class="pacer-exemplo-exemplo">Exemplo:</span> Pega uma tarefa e avalia precisamente sua complexidade
+                    </div>
+                </div>
+                <div class="pacer-exemplo-session">
+                    <h3 class="pacer-exemplo-title">Autonomia</h3>
+                    <div class="pacer-exemplo-group">
+                        <span class="pacer-exemplo-subtitle">0 - Dirigido</span>
+                        <ul class="pacer-exemplo-list">
+                            <li>Não consegue/não quer iniciar as suas atividades;</li>
+                            <li>Sempre precisa de alguém ao seu lado para progredir nas atividades;</li>
+                        </ul>
+                        <span class="pacer-exemplo-exemplo">Exemplo:</span> Pessoa que tem uma tarefa na mão, mas vai encerrar a sprint sem conclusão.
+                    </div>
+                    <div class="pacer-exemplo-group">
+                        <span class="pacer-exemplo-subtitle">1 - Gerido</span>
+                        <ul class="pacer-exemplo-list">
+                            <li>Demora demais para iniciar as atividades;</li>
+                            <li>Demora para perceber que precisa de ajuda;</li>
+                            <li>Demora para entender o que tem que ser estudado;</li>
+                            <li>Só avança quando alguém lhe diz exatamente o que deve ser feito;</li>
+                        </ul>
+                        <span class="pacer-exemplo-exemplo">Exemplo:</span> Sabe como resolver uma tarefa, mas só avança após a instrução de alguém.
+                    </div>
+                    <div class="pacer-exemplo-group">
+                        <span class="pacer-exemplo-subtitle">2 - Treinado</span>
+                        <ul class="pacer-exemplo-list">
+                            <li>Recorre a experiências descritas por alguém antes de tomar as atitudes;</li>
+                            <li>Repete passos buscando os mesmos resultados;</li>
+                            <li>Pouca capacidade criativa;</li>
+                        </ul>
+                        <span class="pacer-exemplo-exemplo">Exemplo:</span> Uma vez com tarefa atribuida, somente resolve problemas na forma com a qual foi preparado.
+                    </div>
+                    <div class="pacer-exemplo-group">
+                        <span class="pacer-exemplo-subtitle">3 - Autogestão</span>
+                        <ul class="pacer-exemplo-list">
+                            <li>Sempre assume as suas responsabilidades com proatividade;</li>
+                            <li>Suas estimativas de prazo são precisas;</li>
+                            <li>Capacidade analítica/crítica dos desafios que se apresentam;</li>
+                        </ul>
+                        <span class="pacer-exemplo-exemplo">Exemplo:</span> Faz as perguntas certas, no momento certo para as pessoas certas.
+                    </div>
+                </div>
+                <div class="pacer-exemplo-session">
+                    <h3 class="pacer-exemplo-title">Colaboração</h3>
+                    <div class="pacer-exemplo-group">
+                        <span class="pacer-exemplo-subtitle">0 - Ausente</span>
+                        <ul class="pacer-exemplo-list">
+                            <li>Não aparece nas reuniões;</li>
+                            <li>Não se interessa pelo projeto;</li>
+                        </ul>
+                    </div>
+                    <div class="pacer-exemplo-group">
+                        <span class="pacer-exemplo-subtitle">1 - Cooperativo</span>
+                        <ul class="pacer-exemplo-list">
+                            <li>Preocupa-se com a organização, contudo não cumpre seu papel;</li>
+                            <li>Provê informação, mas não faz uma comunicação efetiva;</li>
+                            <li>Toma decisões individualmente, mas não em equipe;</li>
+                        </ul>
+                        <span class="pacer-exemplo-exemplo">Exemplo:</span> Ficou responsável pela tarefa X. E a fez, mas nada se integra ao dele.
+                    </div>
+                    <div class="pacer-exemplo-group">
+                        <span class="pacer-exemplo-subtitle">2 - Coordenado</span>
+                        <ul class="pacer-exemplo-list">
+                            <li>Compartilha as informaçoes e segue bem os papéis definidos;</li>
+                            <li>Comunica-se com frequência;</li>
+                            <li>Compartilha decisões tomadas;</li>
+                        </ul>
+                        <span class="pacer-exemplo-exemplo">Exemplo:</span> Acontecem erros mas devido a boa comunicação, são resolvidos rapidamente.
+                    </div>
+                    <div class="pacer-exemplo-group">
+                        <span class="pacer-exemplo-subtitle">3 - Colaborativo</span>
+                        <ul class="pacer-exemplo-list">
+                            <li>A equipe age como se fose um único organismo;</li>
+                            <li>A comunicação é prioridade e sempre remete confiaça a todos;</li>
+                            <li>Decisões geram consenso e compartilham ideias e recursos;</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="pacer-exemplo-session">
+                    <h3 class="pacer-exemplo-title">Entrega de Resultados</h3>
+                    <div class="pacer-exemplo-group">
+                        <span class="pacer-exemplo-subtitle">0 - Não há entregas</span>
+                        <ul class="pacer-exemplo-list">
+                            <li>Não ocorrem entregas de sucesso;</li>
+                            <li>Existem pontos que aparentemente não serão resolvidos no tempo restante;</li>
+                        </ul>
+                        <span class="pacer-exemplo-exemplo">Exemplo:</span> Entrega individual comprometeu a entrega da equipe ou simplesmente não entregou nada.
+                    </div>
+                    <div class="pacer-exemplo-group">
+                        <span class="pacer-exemplo-subtitle">1 - Entregas Duvidosas</span>
+                        <ul class="pacer-exemplo-list">
+                            <li>Existem dúvidas se a entrega não coloca em risco o projeto;</li>
+                            <li>Ações urgentes precisam ser tomadas para garantir a entrega;</li>
+                        </ul>
+                        <span class="pacer-exemplo-exemplo">Exemplo:</span> Não dá para encerrar a sprint sem conferir cada detalhe da entrega.
+                    </div>
+                    <div class="pacer-exemplo-group">
+                        <span class="pacer-exemplo-subtitle">2 - Entregas Confiáveis</span>
+                        <ul class="pacer-exemplo-list">
+                            <li>O sucesso é provável. Contudo é necessário uma atenção constante para garantir que riscos não ameacem o projeto;</li>
+                        </ul>
+                        <span class="pacer-exemplo-exemplo">Exemplo:</span> As entregas de Fulano geralmente são bem feitas. Mas é melhor conferir.
+                    </div>
+                    <div class="pacer-exemplo-group">
+                        <span class="pacer-exemplo-subtitle">3 - Entregas Perfeitas</span>
+                        <ul class="pacer-exemplo-list">
+                            <li>Entregas completas, sem erros, bem documentadas;</li>
+                        </ul>
+                        <span class="pacer-exemplo-exemplo">Exemplo:</span> Entregas que não precisam de considerações.
                     </div>
                 </div>
             </div>
