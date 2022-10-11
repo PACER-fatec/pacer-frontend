@@ -64,7 +64,7 @@ const sendEvaluation = () => {
         data: formData,
         headers: {'Content-Type': 'multipart/form-data'}
     }).then((response) => {
-        mensagemSpan.innerHTML = response.data
+        alert(response.data)
         changeMessageColor(mensagemSpan.innerHTML); 
     });
 }

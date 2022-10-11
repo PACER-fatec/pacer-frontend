@@ -36,7 +36,7 @@ window.addEventListener('load', (event) => {
                 li.setAttribute('id', 'group ' + i)
                 link = "https://pacerftc-backend.herokuapp.com/pacer/grupoSelecionado?grupo=" + element
                 li.setAttribute('value', "https://pacerftc-backend.herokuapp.com/pacer/grupoSelecionado?grupo=" + element)
-                li.setAttribute('onclick', "location.href='../avaliacao.html'")
+                li.setAttribute('onclick', "location.href='../src/avaliacao.html'")
             }
             else {
                 li.innerText = 'Nenhum grupo encontrado!'
