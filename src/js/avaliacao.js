@@ -9,15 +9,16 @@ window.addEventListener('load', (event) => {
     axios.get(window.sessionStorage.getItem('grupoSelecionado'))
     .then((res) => {
         alunos = res.data
+        emailAlunos = []
         alunos.forEach((aluno) => {
             if (aluno != "")
             {
-                console.log(aluno)
-                populateSelect('avaliador', aluno);
-                populateSelect('avaliado', aluno);
+                emailAlunos.push(aluno[0]['email'])
             }
-        });
-        window.sessionStorage.removeItem('grupoSelecionado')
+        })
+        console.log(emailAlunos)
+        populateSelectArray('avaliador', emailAlunos)
+        populateSelectArray('avaliado', emailAlunos)
     })
     .catch((err) => {
         console.warn(err)
@@ -27,6 +28,7 @@ window.addEventListener('load', (event) => {
     sairButton.addEventListener('click', (event) => {
         window.sessionStorage.removeItem('logged')
         window.sessionStorage.removeItem('ROLE')
+        window.sessionStorage.clear()
         window.location.href = 'login.html'
     })
 
@@ -42,21 +44,26 @@ const clearAssessedSelect = () => {
 const sendEvaluation = () => {
     const sprintSelect = document.getElementById('sprint');
     const avaliadorSelect = document.getElementById('avaliador');
+    const avaliadorValue = avaliadorSelect.options[avaliadorSelect.selectedIndex].innerHTML;
     const avaliadoSelect = document.getElementById('avaliado');
-    const proatividadeSelect = document.getElementById('proatividade');
-    const autonomiaSelect = document.getElementById('autonomia');
-    const colaboracaoSelect = document.getElementById('colaboracao');
-    const resultadosSelect = document.getElementById('entrega-resultados');
+    const avaliadoValue = avaliadoSelect.options[avaliadoSelect.selectedIndex].innerHTML;
+    const skill1 = document.getElementById('skill1');
+    const skill2 = document.getElementById('skill2');
+    const skill3 = document.getElementById('skill3');
+    const skill4 = document.getElementById('skill4');
+    const skill5 = document.getElementById('skill5');
     const mensagemSpan = document.getElementById('mensagem');
 
     let formData = new FormData();
     formData.append('sprint', sprintSelect.value);
-    formData.append('avaliador', avaliadorSelect.value);
-    formData.append('avaliado', avaliadoSelect.value);
-    formData.append('proatividade', proatividadeSelect.value);
-    formData.append('autonomia', autonomiaSelect.value);
-    formData.append('colaboracao', colaboracaoSelect.value);
-    formData.append('entrega-resultados', resultadosSelect.value);
+    formData.append('avaliador', avaliadorValue);
+    formData.append('avaliado', avaliadoValue);
+    formData.append('skill1', skill1.value);
+    formData.append('skill2', skill2.value);
+    formData.append('skill3', skill3.value);
+    formData.append('skill4', skill4.value);
+    formData.append('skill5', skill5.value);
+    formData.append('nomeGrupo', window.sessionStorage.getItem('nomeGrupoSelecionado'))
 
     axios({
         method: 'post',
@@ -65,15 +72,6 @@ const sendEvaluation = () => {
         headers: {'Content-Type': 'multipart/form-data'}
     }).then((response) => {
         alert(response.data)
-        changeMessageColor(mensagemSpan.innerHTML); 
+        location.reload()
     });
-}
-
-function changeMessageColor(mensagem) {
-    const span = document.getElementById('mensagem');
-    if(mensagem == 'Avaliação enviada! Obrigado.') {
-        span.style.color = "#32CD32"
-    } else {
-        span.style.color = '#B22222'
-    }
 }

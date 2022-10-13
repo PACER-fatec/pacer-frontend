@@ -1,5 +1,6 @@
 window.onclick = e => {
     window.sessionStorage.setItem("grupoSelecionado", e.target.getAttribute("value"))
+    window.sessionStorage.setItem("nomeGrupoSelecionado", e.target.getAttribute("nomeGrupo"))
 } 
 
 window.addEventListener('load', (event) => {
@@ -36,7 +37,8 @@ window.addEventListener('load', (event) => {
                 li.setAttribute('id', 'group ' + i)
                 link = "https://pacerftc-backend.herokuapp.com/pacer/grupoSelecionado?grupo=" + element
                 li.setAttribute('value', "https://pacerftc-backend.herokuapp.com/pacer/grupoSelecionado?grupo=" + element)
-                li.setAttribute('onclick', "location.href='../avaliacao.html'")
+                li.setAttribute('nomeGrupo', element)
+                li.setAttribute('onclick', "location.href='../src/avaliacao.html'")
             }
             else {
                 li.innerText = 'Nenhum grupo encontrado!'
