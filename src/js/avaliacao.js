@@ -106,6 +106,8 @@ const sendEvaluation = () => {
     formData.append(document.getElementById('skill5-label').innerHTML, skill5.value);
     formData.append('nomeGrupo', window.sessionStorage.getItem('nomeGrupoSelecionado'))
 
+    console.log(ok)
+
     axios({
         method: 'post',
         url: 'http://127.0.0.1:5000/pacer',
