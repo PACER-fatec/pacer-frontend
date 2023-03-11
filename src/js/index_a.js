@@ -24,7 +24,7 @@ window.addEventListener('load', (event) => {
 
     let lista = document.getElementById("listaGrupos");
 
-    axios.get('https://pacerftc-backend.herokuapp.com/pacer/gruposAlunoLogado', {
+    axios.get('http://127.0.0.1:5000/pacer/gruposAlunoLogado', {
         params: {'email': email}
     })
     .then((res) => {
@@ -35,8 +35,8 @@ window.addEventListener('load', (event) => {
                 li.innerText = element
                 li.setAttribute('class', 'groupList')
                 li.setAttribute('id', 'group ' + i)
-                link = "https://pacerftc-backend.herokuapp.com/pacer/grupoSelecionado?grupo=" + element
-                li.setAttribute('value', "https://pacerftc-backend.herokuapp.com/pacer/grupoSelecionado?grupo=" + element)
+                link = "http://127.0.0.1:5000/pacer/grupoSelecionado?grupo=" + element
+                li.setAttribute('value', "http://127.0.0.1:5000/pacer/grupoSelecionado?grupo=" + element)
                 li.setAttribute('nomeGrupo', element)
                 li.setAttribute('onclick', "location.href='../src/avaliacao.html'")
             }

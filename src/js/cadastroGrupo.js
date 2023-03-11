@@ -1,32 +1,24 @@
-
-window.addEventListener('load', (event) => {
-
-    if (!window.sessionStorage.getItem('logged') && 
-        !window.sessionStorage.getItem('ROLE') == 'ROLE_ALUNO') {
-            alert("Você precisa estar logado como aluno para acessar esta página!")
-            window.sessionStorage.clear()
-            window.close()
-    }    
-
-    if (window.sessionStorage.getItem("ROLE") == 'ROLE_ALUNO')
-    {
-        document.getElementById("email1-reg").value = window.sessionStorage.getItem('email')
-        document.getElementById("email1-reg").disabled = true
-    }
-
-
-
-    axios.get('https://pacerftc-backend.herokuapp.com/pacer/skills', {}).then((res) => {
-        skills = res.data
-        skills.forEach((topico) => {
-            populateSelectArray('skill1', topico.Skills)
-            populateSelectArray('skill2', topico.Skills)
-            populateSelectArray('skill3', topico.Skills)
-            populateSelectArray('skill4', topico.Skills)
-            populateSelectArray('skill5', topico.Skills)
-        });
-    })
+axios.get('http://127.0.0.1:5000/pacer/skills', {}).then((res) => {
+  const skills = res.data;
+  skills.forEach((topico) => {
+    populateSelectArray('skill1', topico.Skills);
+    populateSelectArray('skill2', topico.Skills);
+    populateSelectArray('skill3', topico.Skills);
+    populateSelectArray('skill4', topico.Skills);
+    populateSelectArray('skill5', topico.Skills);
+  });
 })
+
+function populateSelectArray(selectId, array) {
+    let selectElement = document.getElementById(selectId);
+    for (let skill of array) {
+        let skillName = Object.keys(skill)[0];
+        let skillOption = document.createElement('option');
+        skillOption.text = skillName;
+        skillOption.value = skillName;
+        selectElement.appendChild(skillOption);
+    }
+}
 
 const criarGrupo = () => {
 
@@ -59,20 +51,28 @@ const criarGrupo = () => {
 
     axios({
         method: 'post',
-        url: 'https://pacerftc-backend.herokuapp.com/pacer/cadastrarGrupo',
+        url: 'http://127.0.0.1:5000/pacer/cadastrarGrupo',
         data: formData,
-        headers: {'Content-Type': 'application/https://pacerftc-backend.herokuapp.com' }
+        headers: {'Content-Type': 'application/http://127.0.0.1:5000' }
     }).then((response) => {
         mensagemErroTemplate.innerHTML = response.data
         changeMessageColor(mensagemErroTemplate.innerHTML); 
     });
 }
 
-function changeMessageColor(mensagem) {
+document.addEventListener('DOMContentLoaded', function() {
+    // Preenche o email do aluno logado no primeiro input text
+    document.getElementById('email1-reg').value = window.sessionStorage.getItem('email');
+
+    // Desabilita o primeiro input text
+    document.getElementById('email1-reg').setAttribute('readonly', true);
+});
+  
+  function changeMessageColor(mensagem) {
     const span = document.getElementById('mensagem');
-    if(mensagem == 'Cadastro concluído!') {
-        span.style.color = "#32CD32"
+    if (mensagem === 'Cadastro concluído!') {
+      span.style.color = '#32CD32';
     } else {
-        span.style.color = '#B22222'
+      span.style.color = '#B22222';
     }
 }

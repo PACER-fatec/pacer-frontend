@@ -8,15 +8,14 @@ window.addEventListener('load', (event) => {
     // Faz request p/ backend para pegar a listagem de alunos
     axios.get(window.sessionStorage.getItem('grupoSelecionado'))
     .then((res) => {
-        alunos = res.data
+        alunos = res.data.alunos
         emailAlunos = []
         alunos.forEach((aluno) => {
             if (aluno != "")
             {
-                emailAlunos.push(aluno[0]['email'])
+                emailAlunos.push(aluno['email'])
             }
         })
-        console.log(emailAlunos)
         populateSelectArray('avaliador', emailAlunos)
         populateSelectArray('avaliado', emailAlunos)
     })
@@ -32,8 +31,50 @@ window.addEventListener('load', (event) => {
         window.location.href = 'login.html'
     })
 
+
     let evaluatorSelect = document.getElementById('avaliador');
 
+});
+
+
+
+axios.get(window.sessionStorage.getItem('grupoSelecionado'))
+    .then((res) => {
+        const groupData = res.data;
+        const skillsList = groupData.skills;
+
+        // popular as labels dos selects de skills
+        for (let i = 1; i <= 5; i++) {
+            const skillLabelElement = document.querySelector(`label[for="skill${i}"]`);
+            skillLabelElement.textContent = skillsList[i-1];
+        }
+
+        let url = 'http://localhost:5000/skills/descricao?';
+
+        for (const skill of skillsList) {
+        url += `&skill=${encodeURIComponent(skill)}`;
+        }
+
+        console.log(url)
+
+        axios.get(url)
+        .then(response => {
+            const skills = response.data.skills;
+            skills.forEach((skill, index) => {
+              const skillName = Object.keys(skill)[0]; // pega o nome da skill (por exemplo, "Analítico")
+              const skillLevel = skill[skillName][0]; // pega o nível da skill (por exemplo, "teste1")
+              const skillTitle = document.querySelectorAll('.pacer-exemplo-title')[index]; // seleciona o elemento com classe "pacer-exemplo-title" de acordo com o índice
+              const skillSubtitle = document.querySelectorAll('.pacer-exemplo-subtitle')[index]; // seleciona o elemento com classe "pacer-exemplo-subtitle" de acordo com o índice
+              skillTitle.innerHTML = skillName; // atualiza o título com o nome da skill
+              skillSubtitle.innerHTML = skillLevel; // atualiza o subtítulo com o nível da skill
+            });
+          })
+          .catch(error => {
+            console.log(error);
+          });
+    })
+    .catch((err) => {
+        console.warn(err)
 });
 
 const clearAssessedSelect = () => {
@@ -58,16 +99,16 @@ const sendEvaluation = () => {
     formData.append('sprint', sprintSelect.value);
     formData.append('avaliador', avaliadorValue);
     formData.append('avaliado', avaliadoValue);
-    formData.append('skill1', skill1.value);
-    formData.append('skill2', skill2.value);
-    formData.append('skill3', skill3.value);
-    formData.append('skill4', skill4.value);
-    formData.append('skill5', skill5.value);
+    formData.append(document.getElementById('skill1-label').innerHTML, skill1.value);
+    formData.append(document.getElementById('skill2-label').innerHTML, skill2.value);
+    formData.append(document.getElementById('skill3-label').innerHTML, skill3.value);
+    formData.append(document.getElementById('skill4-label').innerHTML, skill4.value);
+    formData.append(document.getElementById('skill5-label').innerHTML, skill5.value);
     formData.append('nomeGrupo', window.sessionStorage.getItem('nomeGrupoSelecionado'))
 
     axios({
         method: 'post',
-        url: 'https://pacerftc-backend.herokuapp.com/pacer',
+        url: 'http://127.0.0.1:5000/pacer',
         data: formData,
         headers: {'Content-Type': 'multipart/form-data'}
     }).then((response) => {

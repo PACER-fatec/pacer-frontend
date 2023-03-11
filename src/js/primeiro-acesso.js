@@ -23,7 +23,7 @@ const confirm = () => {
 
     axios({
         method: 'POST',
-        url: 'https://pacerftc-backend.herokuapp.com/pacer/login/novasenha',
+        url: 'http://127.0.0.1:5000/pacer/login/novasenha',
         data: formData,
         headers: {'Content-Type': 'multipart/form-data'}
     }).then((response) => {

@@ -4,9 +4,14 @@
 }
 
 .pacer-exemplo-title {
+    font-weight: 700;
+    font-size: 15px;;
+}
+
+.pacer-exemplo-htitle {
     font-weight: 500;
-    font-size: 20px;
-    padding-bottom: 10px;
+    font-size: 22px;
+    padding-bottom: 20px;
 }
 
 .pacer-exemplo-group {
@@ -14,7 +19,7 @@
 }
 
 .pacer-exemplo-subtitle {
-    font-weight: 500;
+    font-weight: 400;
 }
 
 .pacer-exemplo-list {
