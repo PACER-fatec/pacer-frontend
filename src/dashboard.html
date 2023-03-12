@@ -24,16 +24,42 @@
             <div class="relatorio-container">
                 <div class="opcoes-container">
                     <div>
-                        <span>Insira um arquivo .CSV contendo os alunos para alimentação da base de dados do sistema.</span>
+                        <span>Confirme a quantidade de pontos do grupo na sprint:</span>
                         </br></br>
-                        <form action= "http://127.0.0.1:5000/pacer/uploadAlunos" method="POST" enctype="multipart/form-data">
-                            <div style="margin-bottom: 10px;"><input type="file" name="alunos" id="fileOpen"></div>
-                            <div style="margin-bottom: 10px;"><input type="submit" onclick="mensagem()" id="botaoFile"></div>
-                        </form>
+                        <label class="label-valor" for="sprint">Sprint:</label>
+                        <select class="select-valor" name="sprint" id="sprint"></select>
+                        <label class="label-valor" for="grupo">Grupo:</label>
+                        <select class="select-valor" name="grupo" id="grupo"></select>
+                        <label class="label-valor" for="">Nota:</label>
+                        <input class="label-valor" type="number" id="inputNota">
+                        <br><br>
+                        <label class="label-valor" for="" id="labelPontos">Pontos calculados automaticamente:</label>
+                        <input class="label-valor" type="number" id="inputPontos" disabled>
+                        <input class="pontosManual" type="checkbox" id="pontosManualCheckbox" onclick="habilitar();">
+                        <label class="pontosManual" for = "pontosManualCheckbox" id = "pontosManualLabel">Alterar manualmente a quantidade de pontos?</label>
+                        <br>
+                        <button class="confirmPontos" id="confirmarPontos">Confirmar pontos</button>
                     </div>
-                    <div style="margin-top: 50px;">
-                        <div style="margin-bottom: 10px;">Para extrair um relatório contendo todas as avaliações, clique no botão abaixo:</div>
-                        <button class="extrair-relatorio-button" onclick="extrairRelatorio()">Extrair relatório</button>
+                    <br><hr><br>
+                    <div>
+                        <div style="margin-bottom: 10px;">
+                            <label>Para extrair um relatório filtrado por grupo e sprint, escolha as opções e clique no botão abaixo:</label>
+                            <br><br>
+                            <label class="filter" for="sprint2">Sprint:</label>
+                            <select class="filter" name="sprint2" id="sprint2"></select>
+                            <label class="filter" for="grupo2">Grupo:</label>
+                            <select class="filter" name="grupo2" id="grupo2"></select>
+                            <br><br>
+                            <button class="confirmPontos" onclick="extrairRelatorio()">Extrair relatório</button>
+                        </div>
+                    </div>
+                    <br><hr><br>
+                    <div>
+                        <div style="margin-bottom: 10px;">
+                            <label>Para extrair um relatório contendo todas as avaliações, clique no botão abaixo:</label>
+                            <br>
+                            <button class="confirmPontos" onclick="extrairRelatorio()">Extrair relatório</button>
+                        </div>
                     </div>
                 </div>
                 <div class="grafico-container">

@@ -8,18 +8,20 @@ window.addEventListener('load', (event) => {
     .then((res) => {
         sprints = res.data
         populateSelectArray('sprint', sprints);
+        populateSelectArray('sprint2', sprints);
     })
     .catch((err) => {
         console.warn(err)
     })
 
-    axios.get('http://127.0.0.1:5000/pacer/alunos')
+    axios.get('http://127.0.0.1:5000/pacer/grupos')
     .then((res) => {
-        alunos = res.data
-        populateSelect('aluno', alunos, true);
+      grupos = res.data
+      populateSelectArray('grupo', grupos.map(g => g.nome));
+      populateSelectArray('grupo2', grupos.map(g => g.nome));
     })
     .catch((err) => {
-        console.warn(err)
+      console.warn(err)
     })
 
     let sairButton = document.getElementById('sair');
@@ -138,3 +140,71 @@ let getMediaAluno = () => {
     });
     
 }
+
+function habilitar(){
+	if(document.getElementById('pontosManualCheckbox').checked){
+		document.getElementById('inputPontos').disabled = false;
+	} else {
+		document.getElementById('inputPontos').disabled = true;
+	}
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const inputNota = document.querySelector('#inputNota');
+    inputNota.addEventListener('input', calcularPontos);
+    const confirmarPontos = document.querySelector('#confirmarPontos');
+    confirmarPontos.addEventListener('click', enviarDados);
+});
+
+function calcularPontos() {
+    const nota = parseFloat(document.querySelector('input[type="number"]').value);
+    const endpoint = "http://127.0.0.1:5000/pacer/grupoSelecionado?grupo=" + document.querySelector('#grupo').value;
+
+    fetch(endpoint)
+        .then(response => response.json())
+        .then(data => {
+            const quantidadeAlunos = data.alunos.length;
+            const valorNotaMaxima = quantidadeAlunos * 15;
+            const pontos = Math.round((nota / 10) * valorNotaMaxima); // arredonda para o inteiro mais próximo
+            document.querySelector('#inputPontos').value = pontos;
+        })
+        .catch(error => console.log(error));
+}
+function enviarDados() {
+    const nota = parseFloat(document.querySelector('input[type="number"]').value);
+    const endpoint = "http://127.0.0.1:5000/pacer/cadastrarAvaliacao";
+  
+    const nomeGrupo = document.querySelector('#grupo').value;
+    const pontos = parseFloat(document.querySelector('#inputPontos').value);
+    const sprint = document.querySelector('#sprint').value;
+  
+    if (nomeGrupo === '' || isNaN(pontos)) {
+      alert('Por favor, forneça um nome de grupo e uma avaliação válidos.');
+      return;
+    }
+  
+    fetch(endpoint, {
+      method: 'POST',
+      body: JSON.stringify({
+        nomeGrupo: nomeGrupo,
+        avaliacao: {
+          sprint: sprint,
+          nota: nota,
+          pontos: pontos
+        }
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.hasOwnProperty('message')) {
+          alert(data.message);
+          window.location.reload();
+        } else {
+          alert(data.error);
+        }
+      })
+      .catch(error => console.log(error));
+  }

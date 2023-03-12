@@ -1,5 +1,18 @@
 let alunos = []
 
+const url = 'http://localhost:5000/skills/descricao?grupo=grupoTeste?sprint=1';
+
+axios.get(url)
+  .then(response => {
+    const documento = response.data;
+    const pontos = documento.pontos;
+    const pontosGrupo = document.querySelector('#pontosGrupo');
+    pontosGrupo.textContent = pontos;
+  })
+  .catch(error => {
+    console.log(error);
+  });
+
 window.addEventListener('load', (event) => {
     if (!window.sessionStorage.getItem('logged')) {
         window.location.href = 'login.html'
@@ -35,8 +48,6 @@ window.addEventListener('load', (event) => {
     let evaluatorSelect = document.getElementById('avaliador');
 
 });
-
-
 
 axios.get(window.sessionStorage.getItem('grupoSelecionado'))
     .then((res) => {
@@ -105,7 +116,7 @@ const sendEvaluation = () => {
     formData.append(document.getElementById('skill4-label').innerHTML, skill4.value);
     formData.append(document.getElementById('skill5-label').innerHTML, skill5.value);
     formData.append('nomeGrupo', window.sessionStorage.getItem('nomeGrupoSelecionado'))
-
+ 
     axios({
         method: 'post',
         url: 'http://127.0.0.1:5000/pacer',
@@ -116,3 +127,36 @@ const sendEvaluation = () => {
         location.reload()
     });
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const sprintSelect = document.getElementById("sprint");
+    const pontosGrupoLabel = document.getElementById("pontosGrupo");
+    const notaGrupoLabel = document.getElementById("notaGrupo");
+    const pontosAlunoLabel = document.getElementById("pontosAluno");
+    
+    const preencherLabels = () => {
+      const grupoSelecionado = window.sessionStorage.getItem('nomeGrupoSelecionado');
+      const sprint = sprintSelect.value;
+  
+      axios.get(`http://localhost:5000/pacer/numeroDeAlunos?nome=${grupoSelecionado}`)
+        .then(response => {
+          const numAlunos = response.data.numero_de_alunos;
+  
+          axios.get(`http://localhost:5000/pacer/pontos?grupo=${grupoSelecionado}&sprint=${sprint}`)
+            .then(response => {
+              const pontos = response.data.pontos;
+              const nota = response.data.nota;
+              pontosGrupoLabel.textContent = "Pontos total do grupo: " + pontos;
+              pontosAlunoLabel.textContent = "Pontos por aluno: " + Math.ceil(pontos / numAlunos);
+              notaGrupoLabel.textContent = "Nota do grupo nesta sprint: " + nota;
+            })
+            .catch(error => console.log(error));
+        })
+        .catch(error => console.log(error));
+    };
+  
+    sprintSelect.addEventListener("change", preencherLabels);
+  
+    // Chama a função uma vez ao carregar a página
+    preencherLabels();
+  });
