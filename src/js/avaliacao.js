@@ -93,40 +93,8 @@ const clearAssessedSelect = () => {
     assessedSelect.innerHTML = '';
 };
 
-const sendEvaluation = () => {
-    const sprintSelect = document.getElementById('sprint');
-    const avaliadorSelect = document.getElementById('avaliador');
-    const avaliadorValue = avaliadorSelect.options[avaliadorSelect.selectedIndex].innerHTML;
-    const avaliadoSelect = document.getElementById('avaliado');
-    const avaliadoValue = avaliadoSelect.options[avaliadoSelect.selectedIndex].innerHTML;
-    const skill1 = document.getElementById('skill1');
-    const skill2 = document.getElementById('skill2');
-    const skill3 = document.getElementById('skill3');
-    const skill4 = document.getElementById('skill4');
-    const skill5 = document.getElementById('skill5');
-    const mensagemSpan = document.getElementById('mensagem');
-
-    let formData = new FormData();
-    formData.append('sprint', sprintSelect.value);
-    formData.append('avaliador', avaliadorValue);
-    formData.append('avaliado', avaliadoValue);
-    formData.append(document.getElementById('skill1-label').innerHTML, skill1.value);
-    formData.append(document.getElementById('skill2-label').innerHTML, skill2.value);
-    formData.append(document.getElementById('skill3-label').innerHTML, skill3.value);
-    formData.append(document.getElementById('skill4-label').innerHTML, skill4.value);
-    formData.append(document.getElementById('skill5-label').innerHTML, skill5.value);
-    formData.append('nomeGrupo', window.sessionStorage.getItem('nomeGrupoSelecionado'))
- 
-    axios({
-        method: 'post',
-        url: 'http://127.0.0.1:5000/pacer',
-        data: formData,
-        headers: {'Content-Type': 'multipart/form-data'}
-    }).then((response) => {
-        alert(response.data)
-        location.reload()
-    });
-}
+var pontosPorAluno = null;
+var grupoSelected = null;
 
 document.addEventListener("DOMContentLoaded", () => {
     const sprintSelect = document.getElementById("sprint");
@@ -136,6 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     const preencherLabels = () => {
       const grupoSelecionado = window.sessionStorage.getItem('nomeGrupoSelecionado');
+      grupoSelected = grupoSelecionado
       const sprint = sprintSelect.value;
   
       axios.get(`http://localhost:5000/pacer/numeroDeAlunos?nome=${grupoSelecionado}`)
@@ -146,6 +115,8 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(response => {
               const pontos = response.data.pontos;
               const nota = response.data.nota;
+              pontosPorAluno = Math.ceil(pontos / numAlunos)
+              console.log (pontosPorAluno);
               pontosGrupoLabel.textContent = "Pontos total do grupo: " + pontos;
               pontosAlunoLabel.textContent = "Pontos por aluno: " + Math.ceil(pontos / numAlunos);
               notaGrupoLabel.textContent = "Nota do grupo nesta sprint: " + nota;
@@ -159,4 +130,41 @@ document.addEventListener("DOMContentLoaded", () => {
   
     // Chama a função uma vez ao carregar a página
     preencherLabels();
+});
+
+const sendEvaluation = () => {
+  const sprintSelect = document.getElementById('sprint');
+  const avaliadorSelect = document.getElementById('avaliador');
+  const avaliadorValue = avaliadorSelect.options[avaliadorSelect.selectedIndex].innerHTML;
+  const avaliadoSelect = document.getElementById('avaliado');
+  const avaliadoValue = avaliadoSelect.options[avaliadoSelect.selectedIndex].innerHTML;
+  const skill1 = document.getElementById('skill1');
+  const skill2 = document.getElementById('skill2');
+  const skill3 = document.getElementById('skill3');
+  const skill4 = document.getElementById('skill4');
+  const skill5 = document.getElementById('skill5');
+  const mensagemSpan = document.getElementById('mensagem');
+
+  let formData = new FormData();
+  formData.append('sprint', sprintSelect.value);
+  formData.append('avaliador', avaliadorValue);
+  formData.append('avaliado', avaliadoValue);
+  formData.append(document.getElementById('skill1-label').innerHTML, skill1.value);
+  formData.append(document.getElementById('skill2-label').innerHTML, skill2.value);
+  formData.append(document.getElementById('skill3-label').innerHTML, skill3.value);
+  formData.append(document.getElementById('skill4-label').innerHTML, skill4.value);
+  formData.append(document.getElementById('skill5-label').innerHTML, skill5.value);
+  formData.append('nomeGrupo', window.sessionStorage.getItem('nomeGrupoSelecionado'))
+  formData.append('pontos_disponiveis', pontosPorAluno)
+  formData.append('grupoSelecionado', grupoSelected)
+
+  axios({
+      method: 'post',
+      url: 'http://127.0.0.1:5000/pacer',
+      data: formData,
+      headers: {'Content-Type': 'multipart/form-data'}
+  }).then((response) => {
+      alert(response.data)
+      location.reload()
   });
+}
