@@ -42,7 +42,7 @@ window.addEventListener('load', (event) => {
 
     let dataAluno = []
     let dataGrupo = []
-    updateGrafico(dataAluno, dataGrupo);
+    updateGrafico(dataAluno, dataGrupo, null);
 })
 
 function extrairRelatorio(){
@@ -60,7 +60,7 @@ function extrairRelatorio(){
     })
 }
 
-function updateGrafico (dataAluno, dataGrupo) {
+function updateGrafico (dataAluno, dataGrupo, skills) {
     const chartContainer = document.getElementById('chart-container');
     let chartCanvas = document.getElementById('radar-chart')
 
@@ -85,55 +85,55 @@ function updateGrafico (dataAluno, dataGrupo) {
         }
     };
     
+    console.log(skills)
+
     const radarChart = new Chart(chartCanvas, {
-        type: 'radar',
-        data: {
-            labels: [
-              'Proatividade',
-              'Autonomia',
-              'Colaboração',
-              'Entrega de Resultados'
-            ],
-            datasets: [{
-              label: 'Média do Aluno',
-              data: dataAluno,
-              fill: true,
-              backgroundColor: 'rgba(255, 99, 132, 0.2)',
-              borderColor: 'rgb(255, 99, 132)',
-              pointBackgroundColor: 'rgb(255, 99, 132)',
-              pointBorderColor: '#fff',
-              pointHoverBackgroundColor: '#fff',
-              pointHoverBorderColor: 'rgb(255, 99, 132)'
-            }, {
-              label: 'Média do Grupo',
-              data: dataGrupo,
-              fill: true,
-              backgroundColor: 'rgba(54, 162, 235, 0.2)',
-              borderColor: 'rgb(54, 162, 235)',
-              pointBackgroundColor: 'rgb(54, 162, 235)',
-              pointBorderColor: '#fff',
-              pointHoverBackgroundColor: '#fff',
-              pointHoverBorderColor: 'rgb(54, 162, 235)'
-            }]
-        },
-        options: {
-            scale: {
-                r: {
-                    min: 0,
-                    max: 3
-                }
-            }
+      type: 'radar',
+      data: {
+        labels: Object.keys(skills),
+        datasets: [{
+          label: 'Média do Aluno',
+          data: Object.values(skills),
+          fill: true,
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgb(255, 99, 132)',
+          pointBackgroundColor: 'rgb(255, 99, 132)',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgb(255, 99, 132)'
+        }, {
+          label: 'Média do Grupo',
+          data: dataGrupo,
+          fill: true,
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgb(54, 162, 235)',
+          pointBackgroundColor: 'rgb(54, 162, 235)',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgb(54, 162, 235)'
+        }]
+      },
+      options: {
+        scale: {
+          r: {
+            min: 0,
+            max: 3
+          }
         }
-    })
+      }
+    });
+    
 }
 
 let getMediaAluno = () => {
     let sprintSelect = document.getElementById('sprint');
+    let grupoSelect = document.getElementById('grupo3');
     let alunoSelect = document.getElementById('aluno');
 
     let formData = new FormData();
     formData.append('nome', alunoSelect.value);
     formData.append('sprint', sprintSelect.value);
+    formData.append('grupo', grupoSelect.value)
 
     axios({
         method: 'post',
@@ -141,7 +141,7 @@ let getMediaAluno = () => {
         data: formData,
         headers: {'Content-Type': 'multipart/form-data'}
     }).then((response) => {
-        updateGrafico(response.data.aluno, response.data.grupo)
+        updateGrafico(alunoSelect, grupoSelect, response.data)
     });
     
 }
