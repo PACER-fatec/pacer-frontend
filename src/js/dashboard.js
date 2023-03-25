@@ -9,6 +9,7 @@ window.addEventListener('load', (event) => {
         sprints = res.data
         populateSelectArray('sprint', sprints);
         populateSelectArray('sprint2', sprints);
+        populateSelectArray('sprint3', sprints);
     })
     .catch((err) => {
         console.warn(err)
@@ -17,8 +18,10 @@ window.addEventListener('load', (event) => {
     axios.get('http://127.0.0.1:5000/pacer/grupos')
     .then((res) => {
       grupos = res.data
+      grupos.unshift({ nome: ''})
       populateSelectArray('grupo', grupos.map(g => g.nome));
       populateSelectArray('grupo2', grupos.map(g => g.nome));
+      populateSelectArray('grupo3', grupos.map(g => g.nome));
     })
     .catch((err) => {
       console.warn(err)
@@ -35,11 +38,12 @@ window.addEventListener('load', (event) => {
         getMediaAluno();
     })
 
+
+
     let dataAluno = []
     let dataGrupo = []
     updateGrafico(dataAluno, dataGrupo);
 })
-
 
 function extrairRelatorio(){
     axios({
@@ -80,6 +84,7 @@ function updateGrafico (dataAluno, dataGrupo) {
             }
         }
     };
+    
     const radarChart = new Chart(chartCanvas, {
         type: 'radar',
         data: {
@@ -141,14 +146,6 @@ let getMediaAluno = () => {
     
 }
 
-function habilitar(){
-	if(document.getElementById('pontosManualCheckbox').checked){
-		document.getElementById('inputPontos').disabled = false;
-	} else {
-		document.getElementById('inputPontos').disabled = true;
-	}
-}
-
 document.addEventListener('DOMContentLoaded', function() {
     const inputNota = document.querySelector('#inputNota');
     inputNota.addEventListener('input', calcularPontos);
@@ -208,3 +205,29 @@ function enviarDados() {
       })
       .catch(error => console.log(error));
   }
+
+document.addEventListener('DOMContentLoaded', function() {
+  const grupoSelect = document.getElementById('grupo3');
+  const alunoSelect = document.getElementById('aluno');
+
+  grupoSelect.addEventListener('change', function() {
+    const grupoSelecionado = grupoSelect.value;
+    axios.get(`http://127.0.0.1:5000/pacer/grupoSelecionado?grupo=${grupoSelecionado}`)
+      .then(response => {
+        const alunos = response.data.alunos;
+        alunoSelect.innerHTML = '';
+
+        alunos.forEach(aluno => {
+          const option = document.createElement('option');
+          option.value = aluno.nome;
+          option.text = aluno.nome;
+          alunoSelect.appendChild(option);
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  });
+});
+  
+  

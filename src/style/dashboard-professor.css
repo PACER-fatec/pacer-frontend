@@ -38,12 +38,19 @@
 
 .select-grafico-container {
     margin-bottom: 40px;
+    width: 100%;
 }
 
 .label-valor {
     margin-right: 5px;
     font-size: 15px;
     width: 5%;
+}
+
+.label-valor-grupo {
+    margin-right: 5px;
+    font-size: 15px;
+    width: 20%;
 }
 
 .select-valor {
