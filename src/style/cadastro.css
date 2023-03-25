@@ -32,6 +32,10 @@
     margin-bottom: 5px;
 }
 
+.email-reg-label-default {
+    margin-bottom: 5px;
+}
+
 .senha-reg-label {
     margin-bottom: 5px;
 }
@@ -48,8 +52,20 @@
     margin-bottom: 10px;
 }
 
+.reg-inputs {
+    display: flex;
+    align-items: center;
+}
+  
 .email-reg-input {
     margin-bottom: 10px;
+    width: 70%;
+}
+
+.email-reg-input-default {
+    margin-bottom: 10px;
+    margin-left: 10px;
+    width: 30%;
 }
 
 .senha-reg-input {

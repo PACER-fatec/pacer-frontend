@@ -22,11 +22,12 @@ const confirm = () => {
 
     const nomeReg = document.getElementById('nome-reg');
     const emailReg = document.getElementById('email-reg');
+    const emailRegDef = document.getElementById('email-reg-def');
     const raReg = document.getElementById('ra-reg');
     const mensagemSpan = document.getElementById('mensagem');
 
     formData.append('nome', nomeReg.value);
-    formData.append('email', emailReg.value);
+    formData.append('email', emailReg.value + '' + emailRegDef.value);
     formData.append('ra', raReg.value);
     formData.append('senha', senhaInput.value);
 
