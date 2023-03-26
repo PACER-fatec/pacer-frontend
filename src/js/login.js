@@ -30,6 +30,9 @@ const login = () => {
         if (response.data['ROLE'] == 'ROLE_PROFESSOR') {
             window.sessionStorage.setItem('ROLE', 'ROLE_PROFESSOR')
             window.location.href = "dashboard.html";
+        } else if (response.data['ROLE'] == 'ROLE_ADMIN') {
+            window.sessionStorage.setItem('ROLE', 'ROLE_ADMIN')
+            window.location.href = "index_adm.html";
         } else {
             window.sessionStorage.setItem('ROLE', 'ROLE_ALUNO')
             window.location.href = "index_a.html";
