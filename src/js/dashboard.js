@@ -90,10 +90,10 @@ function updateGrafico (dataAluno, dataGrupo, skills) {
     const radarChart = new Chart(chartCanvas, {
       type: 'radar',
       data: {
-        labels: Object.keys(skills),
+        labels: Object.keys(skills["media_aluno"]),
         datasets: [{
           label: 'Média do Aluno',
-          data: Object.values(skills),
+          data: Object.values(skills["media_aluno"]),
           fill: true,
           backgroundColor: 'rgba(255, 99, 132, 0.2)',
           borderColor: 'rgb(255, 99, 132)',
@@ -103,7 +103,7 @@ function updateGrafico (dataAluno, dataGrupo, skills) {
           pointHoverBorderColor: 'rgb(255, 99, 132)'
         }, {
           label: 'Média do Grupo',
-          data: dataGrupo,
+          data: Object.values(skills["media_grupo"]),
           fill: true,
           backgroundColor: 'rgba(54, 162, 235, 0.2)',
           borderColor: 'rgb(54, 162, 235)',
