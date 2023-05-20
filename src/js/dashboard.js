@@ -60,6 +60,26 @@ function extrairRelatorio(){
     })
 }
 
+function extrairRelatorioFiltrado() {
+  const nomeGrupo = document.getElementById("grupo2").value;
+  const sprint = document.getElementById("sprint2").value;
+
+  const url = `http://127.0.0.1:5000/pacer/csvfileFiltered?nomeGrupo=${nomeGrupo}&sprint=${sprint}`;
+
+  axios({
+      method: 'GET',
+      url: url,
+      responseType: 'blob'
+  }).then((response) => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'relatorio.csv');
+      document.body.appendChild(link);
+      link.click();
+  });
+}
+
 function updateGrafico (dataAluno, dataGrupo, skills) {
     const chartContainer = document.getElementById('chart-container');
     let chartCanvas = document.getElementById('radar-chart')
