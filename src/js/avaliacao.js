@@ -105,7 +105,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const preencherLabels = () => {
       const grupoSelecionado = window.sessionStorage.getItem('nomeGrupoSelecionado');
       grupoSelected = grupoSelecionado
-      const sprint = sprintSelect.value;
+
+      axios.get('http://127.0.0.1:5000/pacer/sprints')
+      .then((res) => {
+          sprints = res.data
+          populateSelectArray('sprint', sprints);
+      })
+
+      const sprint = sprintSelect.value; 
+
+      
   
       axios.get(`http://localhost:5000/pacer/numeroDeAlunos?nome=${grupoSelecionado}`)
         .then(response => {
