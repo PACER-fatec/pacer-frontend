@@ -27,8 +27,6 @@ const criarGrupo = () => {
 
     const nomeGrupo = document.getElementById('nome-reg').value;
 
-    const materia = document.getElementById('materia').value;
-
     const mensagemErroTemplate = document.getElementById('mensagem');
     mensagemErroTemplate.innerHTML = '';
 
@@ -45,8 +43,7 @@ const criarGrupo = () => {
                 document.getElementById('skill2').value,
                 document.getElementById('skill3').value,
                 document.getElementById('skill4').value,
-                document.getElementById('skill5').value],
-        materia: materia
+                document.getElementById('skill5').value]
     }
 
     axios({
