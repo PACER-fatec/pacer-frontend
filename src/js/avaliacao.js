@@ -13,6 +13,11 @@ axios.get(url)
     console.log(error);
   });
 
+function abrirPopup() {
+  window.sessionStorage.setItem("alterarGrupo", true);
+  window.open("cadastroGrupo.html", "Cadastro de Grupo", "width=675,height=800");
+}
+
 window.addEventListener('load', (event) => {
     if (!window.sessionStorage.getItem('logged')) {
         window.location.href = 'login.html'
@@ -29,7 +34,8 @@ window.addEventListener('load', (event) => {
                 emailAlunos.push(aluno['email'])
             }
         }) 
-        console.log (emailAlunos)
+        console.log(emailAlunos)
+        window.sessionStorage.setItem("alunos", emailAlunos);
         populateSelectEmails('avaliado', emailAlunos)
     })
     .catch((err) => {
@@ -112,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const pontosGrupoLabel = document.getElementById("pontosGrupo");
     const notaGrupoLabel = document.getElementById("notaGrupo");
     const pontosAlunoLabel = document.getElementById("pontosAluno");
-    
+
     const preencherLabels = () => {
       const grupoSelecionado = window.sessionStorage.getItem('nomeGrupoSelecionado');
       grupoSelected = grupoSelecionado

@@ -50,17 +50,36 @@ const criarGrupo = () => {
     }
 
     axios({
-        method: 'post',
+        method: 'put',
         url: 'http://127.0.0.1:5000/pacer/cadastrarGrupo',
         data: formData,
         headers: {'Content-Type': 'application/http://127.0.0.1:5000' }
     }).then((response) => {
         mensagemErroTemplate.innerHTML = response.data
-        changeMessageColor(mensagemErroTemplate.innerHTML); 
+        alert(mensagemErroTemplate.innerHTML);
+        if (mensagemErroTemplate.innerHTML === "Grupo criado com sucesso!" || mensagemErroTemplate.innerHTML === "Grupo atualizado com sucesso!") {
+          window.close();
+        }
     });
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+
+  var alterarGrupo = window.sessionStorage.getItem("alterarGrupo");
+  if (alterarGrupo === "true") {
+    var nomeInput = document.getElementById("nome-reg");
+    nomeInput.disabled = true;
+    nomeInput.value = window.sessionStorage.getItem("nomeGrupoSelecionado");
+
+    var alunos = window.sessionStorage.getItem("alunos").split(",");
+
+    var emailInputs = document.querySelectorAll(".email-reg-input");
+    for (var i = 0; i < emailInputs.length; i++) {
+      emailInputs[i].disabled = true;
+      emailInputs[i].value = alunos[i] || "";
+    }
+  }
+
     // Preenche o email do aluno logado no primeiro input text
     document.getElementById('email1-reg').value = window.sessionStorage.getItem('email');
 
