@@ -28,13 +28,24 @@ window.addEventListener('load', (event) => {
             {
                 emailAlunos.push(aluno['email'])
             }
-        })
-        populateSelectArray('avaliador', emailAlunos)
-        populateSelectArray('avaliado', emailAlunos)
+        }) 
+        console.log (emailAlunos)
+        populateSelectEmails('avaliado', emailAlunos)
     })
     .catch((err) => {
         console.warn(err)
     })
+
+    function populateSelectEmails(selectId, array) {
+      let selectElement = document.getElementById(selectId);
+      for (let email of array) {
+          let option = document.createElement('option');
+          option.text = email;
+          option.value = email;
+          selectElement.appendChild(option);
+      }
+    }
+    
 
     let sairButton = document.getElementById('sair');
     sairButton.addEventListener('click', (event) => {
@@ -106,21 +117,17 @@ document.addEventListener("DOMContentLoaded", () => {
       const grupoSelecionado = window.sessionStorage.getItem('nomeGrupoSelecionado');
       grupoSelected = grupoSelecionado
 
-      axios.get('http://127.0.0.1:5000/pacer/sprints')
+      axios.get(`http://127.0.0.1:5000/pacer/sprints?grupo=${grupoSelecionado}`)
       .then((res) => {
           sprints = res.data
           populateSelectArray('sprint', sprints);
       })
 
-      const sprint = sprintSelect.value; 
-
-      
-  
-      axios.get(`http://localhost:5000/pacer/numeroDeAlunos?nome=${grupoSelecionado}`)
+      axios.get(`http://localhost:5000/pacer/numeroDeAlunos?nome=${grupoSelecionado}`) 
         .then(response => {
           const numAlunos = response.data.numero_de_alunos;
   
-          axios.get(`http://localhost:5000/pacer/pontos?grupo=${grupoSelecionado}&sprint=${sprint}`)
+          axios.get(`http://localhost:5000/pacer/pontos?grupo=${grupoSelecionado}&sprint=${sprintSelect.value}`)
             .then(response => {
               const pontos = response.data.pontos;
               const nota = response.data.nota;
@@ -144,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const sendEvaluation = () => {
   const sprintSelect = document.getElementById('sprint');
   const avaliadorSelect = document.getElementById('avaliador');
-  const avaliadorValue = avaliadorSelect.options[avaliadorSelect.selectedIndex].innerHTML;
+  const avaliadorValue = window.sessionStorage.getItem('email');
   const avaliadoSelect = document.getElementById('avaliado');
   const avaliadoValue = avaliadoSelect.options[avaliadoSelect.selectedIndex].innerHTML;
   const skill1 = document.getElementById('skill1');

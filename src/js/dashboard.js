@@ -80,6 +80,17 @@ function extrairRelatorioFiltrado() {
   });
 }
 
+function habilitar() {
+  var inputPontos = document.getElementById("inputPontos");
+  var pontosManualCheckbox = document.getElementById("pontosManualCheckbox");
+  
+  if (pontosManualCheckbox.checked) {
+    inputPontos.disabled = false;
+  } else {
+    inputPontos.disabled = true;
+  }
+}
+
 function updateGrafico (dataAluno, dataGrupo, skills) {
     const chartContainer = document.getElementById('chart-container');
     let chartCanvas = document.getElementById('radar-chart')
