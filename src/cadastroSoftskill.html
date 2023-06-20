@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="./style/reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="./style/base.css">
+        <link rel="stylesheet" href="./style/cadastroSkills.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+        <script src="./js/baseScript.js"></script>
+        <title>PACER Fatec</title>
+    </head>
+    <body>
+        <div class="popup-container">
+            <div class="popup-content">
+                <span class="popup-close" onclick="fecharPopup()">×</span>
+                <h2>Cadastrar Nova Skill</h2>
+                <form id="skill-form" onsubmit="enviarSkill(event)">
+                    <label for="skill-nome">Nome da Skill:</label>
+                    <input type="text" id="skill-nome" required>
+                    <label for="skill-descricao">Descrição:</label>
+                    <textarea id="skill-descricao" required></textarea>
+                    <button type="submit" class="cadastro-button">Cadastrar</button>
+                </form>
+            </div>
+        </div>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+        <script src="./js/cadastroSkills.js"></script>
+    </body>
+</html>

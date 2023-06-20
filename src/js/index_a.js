@@ -58,3 +58,10 @@ function cadastroGrupoPopup(){
     'pagina',
     "width=1500, height=700, left=300, top=25, resizeble=no, scrollbars=no, menubar=no, status=no, titlebar=no, toolbar=no");
 }
+
+function cadastroSkillPopup(){
+    varWindow = window.open (
+    'cadastroSoftskill.html',
+    'pagina',
+    "width=800, height=600, left=800, top=25, resizeble=no, scrollbars=no, menubar=no, status=no, titlebar=no, toolbar=no");
+}
