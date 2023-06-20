@@ -116,7 +116,7 @@ var grupoSelected = null;
 document.addEventListener("DOMContentLoaded", () => {
     const sprintSelect = document.getElementById("sprint");
     const pontosGrupoLabel = document.getElementById("pontosGrupo");
-    const notaGrupoLabel = document.getElementById("notaGrupo");
+    const situacaoSprintLabel = document.getElementById("situacaoSprint");
     const pontosAlunoLabel = document.getElementById("pontosAluno");
 
     const preencherLabels = () => {
@@ -136,12 +136,11 @@ document.addEventListener("DOMContentLoaded", () => {
           axios.get(`http://localhost:5000/pacer/pontos?grupo=${grupoSelecionado}&sprint=${sprintSelect.value}`)
             .then(response => {
               const pontos = response.data.pontos;
-              const nota = response.data.nota;
+              const nota = response.data.situacao;
               pontosPorAluno = Math.ceil(pontos / numAlunos)
               console.log (pontosPorAluno);
-              pontosGrupoLabel.textContent = "Pontos total do grupo: " + pontos;
-              pontosAlunoLabel.textContent = "Pontos por aluno: " + Math.ceil(pontos / numAlunos);
-              notaGrupoLabel.textContent = "Nota do grupo nesta sprint: " + nota;
+              pontosGrupoLabel.textContent = "Pontos disponíveis: " + pontos;
+              situacaoSprintLabel.textContent = "Situação da entrega nesta sprint: " + nota;
             })
             .catch(error => console.log(error));
         })
