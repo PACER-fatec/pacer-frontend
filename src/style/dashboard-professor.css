@@ -44,7 +44,7 @@
 .label-valor {
     margin-right: 5px;
     font-size: 15px;
-    width: 5%;
+    width: 6%;
 }
 
 .label-valor-grupo {
@@ -55,6 +55,7 @@
 
 .select-valor {
     margin-right: 20px;
+    width: 15%;
 }
 
 .radar-chart-button {

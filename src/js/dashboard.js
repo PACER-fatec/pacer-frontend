@@ -178,28 +178,13 @@ let getMediaAluno = () => {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    const inputNota = document.querySelector('#inputNota');
-    inputNota.addEventListener('input', calcularPontos);
     const confirmarPontos = document.querySelector('#confirmarPontos');
     confirmarPontos.addEventListener('click', enviarDados);
 });
 
-function calcularPontos() {
-    const nota = parseFloat(document.querySelector('input[type="number"]').value);
-    const endpoint = "http://127.0.0.1:5000/pacer/grupoSelecionado?grupo=" + document.querySelector('#grupo').value;
-
-    fetch(endpoint)
-        .then(response => response.json())
-        .then(data => {
-            const quantidadeAlunos = data.alunos.length;
-            const valorNotaMaxima = quantidadeAlunos * 15;
-            const pontos = Math.round((nota / 10) * valorNotaMaxima); // arredonda para o inteiro mais próximo
-            document.querySelector('#inputPontos').value = pontos;
-        })
-        .catch(error => console.log(error));
-}
 function enviarDados() {
-    const nota = parseFloat(document.querySelector('input[type="number"]').value);
+    const situacaoSelect = document.getElementById('inputSit')
+    const situacaoValue =  situacaoSelect.options[situacaoSelect.selectedIndex].innerHTML;
     const endpoint = "http://127.0.0.1:5000/pacer/cadastrarAvaliacao";
   
     const nomeGrupo = document.querySelector('#grupo').value;
@@ -217,7 +202,7 @@ function enviarDados() {
         nomeGrupo: nomeGrupo,
         avaliacao: {
           sprint: sprint,
-          nota: nota,
+          situacao: situacaoValue,
           pontos: pontos
         }
       }),
