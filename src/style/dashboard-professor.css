@@ -15,8 +15,8 @@
 }
 
 .radar-chart {
-    max-width: 500px !important;
-    max-height: 500px !important;
+    width: 700px !important;
+    height: 700px !important;
 }
 
 .grafico-container {

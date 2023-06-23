@@ -37,12 +37,6 @@ window.addEventListener('load', (event) => {
     graficoButton.addEventListener('click', (event) => {
         getMediaAluno();
     })
-
-
-
-    let dataAluno = []
-    let dataGrupo = []
-    updateGrafico(dataAluno, dataGrupo, null);
 })
 
 function extrairRelatorio(){
@@ -91,91 +85,100 @@ function habilitar() {
   }
 }
 
-function updateGrafico (dataAluno, dataGrupo, skills) {
-    const chartContainer = document.getElementById('chart-container');
-    let chartCanvas = document.getElementById('radar-chart')
+let chartInstance = null;
 
-    if (chartCanvas) {
-        chartContainer.removeChild(chartCanvas)
+function updateGrafico(dataAluno, dataGrupo, skills) {
+  const chartContainer = document.getElementById('chart-container');
 
-        chartCanvas = document.createElement('canvas')
-        chartCanvas.id = 'radar-chart'
-        chartCanvas.classList.add('radar-chart')
-        chartContainer.appendChild(chartCanvas)
-    }
+  let chartCanvas = document.getElementById('radar-chart');
 
-    chartCanvas = chartCanvas.getContext('2d');
-    var options = {
-        responsive: false,
-        maintainAspectRatio: true,
-        scale: {
-            ticks: {
-                beginAtZero: true,
-                max: 3
+  if (chartInstance) {
+      chartInstance.destroy();
+  }
+
+  if (chartCanvas) {
+      chartContainer.removeChild(chartCanvas);
+  }
+
+  chartCanvas = document.createElement('canvas');
+  chartCanvas.id = 'radar-chart';
+  chartCanvas.classList.add('radar-chart');
+  chartContainer.appendChild(chartCanvas);
+
+  chartCanvas = document.getElementById('radar-chart').getContext('2d');
+
+  const labels = skills && skills["media_aluno"] ? Object.keys(skills["media_aluno"]) : [];
+  const dataAlunoValues = skills && skills["media_aluno"] ? Object.values(skills["media_aluno"]) : [];
+  const dataGrupoValues = skills && skills["media_grupo"] ? Object.values(skills["media_grupo"]) : [];
+
+  const radarChartData = {
+      labels: labels,
+      datasets: [
+          {
+              label: 'Média do Aluno',
+              data: dataAlunoValues,
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+              borderColor: 'rgb(255, 99, 132)',
+              pointBackgroundColor: 'rgb(255, 99, 132)',
+              pointBorderColor: '#fff',
+              pointHoverBackgroundColor: '#fff',
+              pointHoverBorderColor: 'rgb(255, 99, 132)',
+              fill: true
+          },
+          {
+              label: 'Média do Grupo',
+              data: dataGrupoValues,
+              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+              borderColor: 'rgb(54, 162, 235)',
+              pointBackgroundColor: 'rgb(54, 162, 235)',
+              pointBorderColor: '#fff',
+              pointHoverBackgroundColor: '#fff',
+              pointHoverBorderColor: 'rgb(54, 162, 235)',
+              fill: true
+          }
+      ]
+  };
+
+  chartInstance = new Chart(chartCanvas, {
+      type: 'radar',
+      data: radarChartData,
+      options: {
+          responsive: false,
+          maintainAspectRatio: true,
+          scales: {
+            r: {
+                suggestedMin: 0,
+                suggestedMax: 3,
+                beginAtZero: true
             }
         }
-    };
-    
-    console.log(skills)
-
-    const radarChart = new Chart(chartCanvas, {
-      type: 'radar',
-      data: {
-        labels: Object.keys(skills["media_aluno"]),
-        datasets: [{
-          label: 'Média do Aluno',
-          data: Object.values(skills["media_aluno"]),
-          fill: true,
-          backgroundColor: 'rgba(255, 99, 132, 0.2)',
-          borderColor: 'rgb(255, 99, 132)',
-          pointBackgroundColor: 'rgb(255, 99, 132)',
-          pointBorderColor: '#fff',
-          pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgb(255, 99, 132)'
-        }, {
-          label: 'Média do Grupo',
-          data: Object.values(skills["media_grupo"]),
-          fill: true,
-          backgroundColor: 'rgba(54, 162, 235, 0.2)',
-          borderColor: 'rgb(54, 162, 235)',
-          pointBackgroundColor: 'rgb(54, 162, 235)',
-          pointBorderColor: '#fff',
-          pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgb(54, 162, 235)'
-        }]
-      },
-      options: {
-        scale: {
-          r: {
-            min: 0,
-            max: 3
-          }
-        }
       }
-    });
-    
+  });
 }
+
+
+
 
 let getMediaAluno = () => {
-    let sprintSelect = document.getElementById('sprint');
-    let grupoSelect = document.getElementById('grupo3');
-    let alunoSelect = document.getElementById('aluno');
+  let sprintSelect = document.getElementById('sprint3');
+  let grupoSelect = document.getElementById('grupo3');
+  let alunoSelect = document.getElementById('aluno');
 
-    let formData = new FormData();
-    formData.append('nome', alunoSelect.value);
-    formData.append('sprint', sprintSelect.value);
-    formData.append('grupo', grupoSelect.value)
+  let formData = new FormData();
+  formData.append('nome', alunoSelect.value);
+  formData.append('sprint', sprintSelect.value);
+  formData.append('grupo', grupoSelect.value);
 
-    axios({
-        method: 'post',
-        url: 'http://127.0.0.1:5000/pacer/media',
-        data: formData,
-        headers: {'Content-Type': 'multipart/form-data'}
-    }).then((response) => {
-        updateGrafico(alunoSelect, grupoSelect, response.data)
-    });
-    
+  axios({
+      method: 'post',
+      url: 'http://127.0.0.1:5000/pacer/media',
+      data: formData,
+      headers: {'Content-Type': 'multipart/form-data'}
+  }).then((response) => {
+      updateGrafico(alunoSelect.value, grupoSelect.value, response.data);
+  });
 }
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const confirmarPontos = document.querySelector('#confirmarPontos');
