@@ -142,6 +142,7 @@ const clearAssessedSelect = () => {
 
 var pontosPorAluno = null;
 var grupoSelected = null;
+var sprintCarregada = false;
 
 document.addEventListener("DOMContentLoaded", () => {
     const sprintSelect = document.getElementById("sprint");
@@ -155,26 +156,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
       axios.get(`http://127.0.0.1:5000/pacer/sprints?grupo=${grupoSelecionado}`)
       .then((res) => {
-          sprints = res.data
-          populateSelectArray('sprint', sprints);
-      })
-
-      axios.get(`http://localhost:5000/pacer/numeroDeAlunos?nome=${grupoSelecionado}`) 
-        .then(response => {
-          const numAlunos = response.data.numero_de_alunos;
-  
+          if (sprintCarregada == false) {
+            sprintCarregada = true
+            sprints = res.data
+            populateSelectArray('sprint', sprints);
+          } 
           axios.get(`http://localhost:5000/pacer/pontos?grupo=${grupoSelecionado}&sprint=${sprintSelect.value}`)
-            .then(response => {
-              const pontos = response.data.pontos;
-              const nota = response.data.situacao;
-              pontosPorAluno = Math.ceil(pontos / numAlunos)
-              console.log (pontosPorAluno);
-              pontosGrupoLabel.textContent = "Pontos disponíveis: " + pontos;
-              situacaoSprintLabel.textContent = "Situação da entrega nesta sprint: " + nota;
-            })
-            .catch(error => console.log(error));
-        })
-        .catch(error => console.log(error));
+          .then(response => {
+            const pontos = response.data.pontos;
+            const nota = response.data.situacao;
+            pontosGrupoLabel.textContent = "Pontos disponíveis: " + pontos;
+            situacaoSprintLabel.textContent = "Situação da entrega nesta sprint: " + nota;
+          })
+          .catch(error => 
+            alert("Sem avaliação do professor para essa sprint"),
+            pontosGrupoLabel.textContent = "Pontos disponíveis: SPRINT NÃO AVALIADA PELO PROFESSOR!",
+            situacaoSprintLabel.textContent = "Situação da entrega nesta sprint: SPRINT NÃO AVALIADA PELO PROFESSOR!"
+        );
+      })
     };
   
     sprintSelect.addEventListener("change", preencherLabels);

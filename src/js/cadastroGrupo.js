@@ -61,27 +61,27 @@ const criarGrupo = () => {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-
-  var alterarGrupo = window.sessionStorage.getItem("alterarGrupo");
-  if (alterarGrupo === "true") {
-    var nomeInput = document.getElementById("nome-reg");
+  var alterarGrupo = window.sessionStorage.getItem('alterarGrupo');
+  if (alterarGrupo === 'true') {
+    var nomeInput = document.getElementById('nome-reg');
     nomeInput.disabled = true;
-    nomeInput.value = window.sessionStorage.getItem("nomeGrupoSelecionado");
+    nomeInput.value = window.sessionStorage.getItem('nomeGrupoSelecionado');
 
-    var alunos = window.sessionStorage.getItem("alunos").split(",");
+    var alunos = window.sessionStorage.getItem('alunos').split(',');
 
-    var emailInputs = document.querySelectorAll(".email-reg-input");
+    var emailInputs = document.querySelectorAll('.email-reg-input');
     for (var i = 0; i < emailInputs.length; i++) {
       emailInputs[i].disabled = true;
-      emailInputs[i].value = alunos[i] || "";
+      emailInputs[i].value = alunos[i] || '';
     }
   }
 
-    // Preenche o email do aluno logado no primeiro input text
-    document.getElementById('email1-reg').value = window.sessionStorage.getItem('email');
+  // Preenche o email do aluno logado no primeiro input text
+  document.getElementById('email1-reg').value = window.sessionStorage.getItem('email');
 
-    // Desabilita o primeiro input text
-    document.getElementById('email1-reg').setAttribute('readonly', true);
+  // Desabilita o primeiro input text
+  document.getElementById('email1-reg').setAttribute('readonly', true);
+
 });
   
   function changeMessageColor(mensagem) {
@@ -92,3 +92,15 @@ document.addEventListener('DOMContentLoaded', function() {
       span.style.color = '#B22222';
     }
 }
+
+window.addEventListener('beforeunload', function() {
+  // Limpar as informações do Session Storage aqui
+  window.sessionStorage.setItem("alterarGrupo", false);
+  sessionStorage.removeItem("nomeGrupoSelecionado");
+});
+
+window.addEventListener('beforeunload', function() {
+  // Limpar as informações do Session Storage aqui
+  window.sessionStorage.setItem("alterarGrupo", false);
+  sessionStorage.removeItem("nomeGrupoSelecionado");
+});
