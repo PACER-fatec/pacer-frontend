@@ -23,36 +23,62 @@ window.addEventListener('load', (event) => {
         window.location.href = 'login.html'
     }
 
-    // Faz request p/ backend para pegar a listagem de alunos
-    axios.get(window.sessionStorage.getItem('grupoSelecionado'))
+  // Faz request para o backend para pegar a listagem de alunos
+  axios.get(window.sessionStorage.getItem('grupoSelecionado'))
     .then((res) => {
-        alunos = res.data.alunos
-        emailAlunos = []
-        alunos.forEach((aluno) => {
-            if (aluno != "")
-            {
-                emailAlunos.push(aluno['email'])
-            }
-        }) 
-        console.log(emailAlunos)
-        window.sessionStorage.setItem("alunos", emailAlunos);
-        populateSelectEmails('avaliado', emailAlunos)
+      alunos = res.data.alunos;
+      emailAlunos = [];
+      alunos.forEach((aluno) => {
+        if (aluno !== "") {
+          emailAlunos.push(aluno['email']);
+        }
+      });
+      console.log(emailAlunos);
+      window.sessionStorage.setItem("alunos", emailAlunos);
+      populateSelectEmails('.avaliado-label', emailAlunos);
+      disableSkillFields(emailAlunos.length);
     })
     .catch((err) => {
-        console.warn(err)
-    })
+      console.warn(err);
+    });
 
-    function populateSelectEmails(selectId, array) {
-      let selectElement = document.getElementById(selectId);
-      for (let email of array) {
-          let option = document.createElement('option');
-          option.text = email;
-          option.value = email;
-          selectElement.appendChild(option);
-      }
+  function populateSelectEmails(selectClass, emailArray) {
+    let selectElements = document.querySelectorAll(selectClass);
+
+    for (let i = 0; i < selectElements.length; i++) {
+      let selectElement = selectElements[i];
+      let formId = selectElement.getAttribute('data-form-id');
+      let email = emailArray[formId - 1] || '';
+
+      let option = document.createElement('option');
+      option.text = email;
+      option.value = email;
+      selectElement.appendChild(option);
     }
-    
+  }
 
+  function disableSkillFields(numAlunos) {
+    let formElements = document.querySelectorAll('.student-form');
+  
+    formElements.forEach((formElement, index) => {
+      let skillSelects = formElement.querySelectorAll('.skill-value');
+      let avaliadoLabel = formElement.querySelector('.avaliado-label');
+      let formId = avaliadoLabel ? avaliadoLabel.getAttribute('data-form-id') : '';
+      let email = avaliadoLabel ? avaliadoLabel.textContent.trim() : '';
+  
+      if (formId && (formId > numAlunos || email === '')) {
+        skillSelects.forEach((select) => {
+          select.disabled = true;
+        });
+      } else {
+        skillSelects.forEach((select) => {
+          select.disabled = false;
+        });
+      }
+    });
+  }
+  
+  
     let sairButton = document.getElementById('sair');
     sairButton.addEventListener('click', (event) => {
         window.sessionStorage.removeItem('logged')
@@ -71,11 +97,15 @@ axios.get(window.sessionStorage.getItem('grupoSelecionado'))
         const groupData = res.data;
         const skillsList = groupData.skills;
 
-        // popular as labels dos selects de skills
-        for (let i = 1; i <= 5; i++) {
-            const skillLabelElement = document.querySelector(`label[for="skill${i}"]`);
-            skillLabelElement.textContent = skillsList[i-1];
+        console.log(skillsList)
+        const skillLabelElements = document.querySelectorAll('.skill-label');
+        const numSkills = skillsList.length;
+        
+        for (let i = 0; i < skillLabelElements.length; i++) {
+          const skillIndex = i % numSkills;
+          skillLabelElements[i].textContent = skillsList[skillIndex];
         }
+        
 
         let url = 'http://localhost:5000/skills/descricao?';
 
@@ -153,39 +183,58 @@ document.addEventListener("DOMContentLoaded", () => {
     preencherLabels();
 });
 
-const sendEvaluation = () => {
-  const sprintSelect = document.getElementById('sprint');
-  const avaliadorSelect = document.getElementById('avaliador');
-  const avaliadorValue = window.sessionStorage.getItem('email');
-  const avaliadoSelect = document.getElementById('avaliado');
-  const avaliadoValue = avaliadoSelect.options[avaliadoSelect.selectedIndex].innerHTML;
-  const skill1 = document.getElementById('skill1');
-  const skill2 = document.getElementById('skill2');
-  const skill3 = document.getElementById('skill3');
-  const skill4 = document.getElementById('skill4');
-  const skill5 = document.getElementById('skill5');
-  const mensagemSpan = document.getElementById('mensagem');
+function sendEvaluation() {
+  var evaluations = [];
+  var forms = document.getElementsByClassName("student-form");
 
-  let formData = new FormData();
-  formData.append('sprint', sprintSelect.value);
-  formData.append('avaliador', avaliadorValue);
-  formData.append('avaliado', avaliadoValue);
-  formData.append(document.getElementById('skill1-label').innerHTML, skill1.value);
-  formData.append(document.getElementById('skill2-label').innerHTML, skill2.value);
-  formData.append(document.getElementById('skill3-label').innerHTML, skill3.value);
-  formData.append(document.getElementById('skill4-label').innerHTML, skill4.value);
-  formData.append(document.getElementById('skill5-label').innerHTML, skill5.value);
-  formData.append('nomeGrupo', window.sessionStorage.getItem('nomeGrupoSelecionado'))
-  formData.append('pontos_disponiveis', pontosPorAluno)
-  formData.append('grupoSelecionado', grupoSelected)
+  for (var i = 0; i < forms.length; i++) {
+    var form = forms[i];
+    var avaliado = form.querySelector(".avaliado-label").textContent.trim();
 
-  axios({
-      method: 'post',
-      url: 'http://127.0.0.1:5000/pacer',
-      data: formData,
-      headers: {'Content-Type': 'multipart/form-data'}
+    // Verificar se o campo "avaliado" está vazio
+    if (avaliado !== "Email do avaliado:" && avaliado !== "") {
+      var skills = {};
+      var skillLabels = form.getElementsByClassName("skill-label");
+      var skillValues = form.getElementsByClassName("skill-value");
+
+      for (var j = 0; j < skillLabels.length; j++) {
+        var skillLabel = skillLabels[j].textContent.trim();
+        var skillValue = skillValues[j].value;
+
+        skills[skillLabel] = skillValue;
+      }
+
+      var evaluation = {
+        avaliado: avaliado.replace("Email do avaliado:", "").trim(),
+        ...skills
+      };
+
+      evaluations.push(evaluation);
+    }
+  }
+
+  var pontos = document.getElementById("pontosGrupo").innerText
+  pontos = pontos.replace("Pontos disponíveis: ", "").trim()
+  var sprint = document.getElementById("sprint");
+  var sprint = sprint.value
+
+
+  var formData = {
+    sprint: sprint,
+    avaliador: window.sessionStorage.getItem('email'),
+    avaliacoes: evaluations,
+    nomeGrupo: window.sessionStorage.getItem('nomeGrupoSelecionado'),
+    pontos_disponiveis: pontos
+  };
+
+
+  axios.post('http://127.0.0.1:5000/pacer', formData, {
+    headers: {'Content-Type': 'application/json'}
   }).then((response) => {
-      alert(response.data)
-      location.reload()
+    alert(response.data);
+    location.reload();
+  }).catch((error) => {
+    console.error('Ocorreu um erro ao enviar a avaliação:', error);
   });
 }
+

@@ -1,163 +1,448 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./style/reset.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="./style/base.css">
-        <link rel="stylesheet" href="./style/form-estudante.css">
-        <link rel="stylesheet" href="./style/pacer-exemplo.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
-        <script src="./js/baseScript.js"></script>
-        <script src="./js/avaliacao.js"></script>
-
-        <title>PACER Fatec - Avaliação</title>
-    </head>
-    <body>
-        <div class="body-container">
-            <div class="main-header">
-                <div>
-                    <span class="main-header-title">PACER</span> Fatec - Aluno
-                </div>
-                <a class="main-header-link" id='sair'>Sair</a>
-            </div>            
-            <label class="student-form-nota" id="situacaoSprint"></label><br>
-            <label class="student-form-points" id="pontosGrupo"></label><br>
-            <br><a class="main-header-link-alterar" id="alterar" href="#" onclick="abrirPopup()">Alterar grupo</a>
-            <div class="student-form-container">
-                <form class="student-form" action="javascript:sendEvaluation()" method="post">
-
-                    <div class="student-form-input-label-group-sprint">
-                        <div class="student-form-input-label">
-                            <label class="student-form-label" for="sprint">Sprint</label>
-                            <select class="student-form-value" name="sprint" id="sprint">
-                        </div>
-                    </div>
-
-                    <div class="student-form-input-label-group">
-                        <div class="student-form-input-label">
-                            <label class="student-form-label" for="avaliador">Email do avaliador</label>
-                            <select class="student-form-value" name="avaliador" id="avaliador" required></select>
-                        </div>
-                    </div>
-
-                    <div class="student-form-input-label-group">
-                        <div class="student-form-input-label">
-                            <label class="student-form-label" for="avaliado">Email do avaliado</label>
-                            <select class="student-form-value" name="avaliado" id="avaliado" required></select>
-                        </div>
-                    </div>
-
-                    <div class="student-form-input-label-group">
-                        <div class="student-form-input-label">
-                          <label id="skill1-label" class="student-form-label" for="skill1"></label>
-                          <select class="student-form-value" name="skill1" id="skill1" data-index="0">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                          </select>
-                        </div>
-                    </div>
- 
-                    <div class="student-form-input-label-group">
-                        <div class="student-form-input-label">
-                          <label id="skill2-label" class="student-form-label" for="skill2"></label>
-                          <select class="student-form-value" name="skill2" id="skill2" data-index="1">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                          </select>
-                        </div>
-                    </div>
-
-                    <div class="student-form-input-label-group">
-                        <div class="student-form-input-label">
-                            <label id="skill3-label" class="student-form-label" for="skill3"></label>
-                            <select class="student-form-value" name="skill3" id="skill3">
-                                <option value="0">0</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="student-form-input-label-group">
-                        <div class="student-form-input-label">
-                            <label id="skill4-label" class="student-form-label" for="skill4"></label>
-                            <select class="student-form-value" name="skill4" id="skill4">
-                                <option value="0">0</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="student-form-input-label-group">
-                        <div class="student-form-input-label">
-                            <label id="skill5-label" class="student-form-label" for="skill5"></label>
-                            <select class="student-form-value" name="skill5" id="skill5">
-                                <option value="0">0</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
-                        </div>
-                    </div>                    
-
-                    <button type="submit" class="student-form-button">Enviar</button>
-                    <span style="margin-top: 10px;" id="mensagem"></span>
-                </form>
-
-                <div class="underline"></div>
-            </div>
-            <div class="pacer-exemplo-container">
-                <h1 class="pacer-exemplo-htitle">Explicação das Skills selecionadas pelo grupo:</h1>
-                <div class="pacer-exemplo-session">
-                    <h3 class="pacer-exemplo-title"></h3>
-                    <div class="pacer-exemplo-group">
-                        <span class="pacer-exemplo-subtitle"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="pacer-exemplo-container">
-                <div class="pacer-exemplo-session">
-                    <h3 class="pacer-exemplo-title"></h3>
-                    <div class="pacer-exemplo-group">
-                        <span class="pacer-exemplo-subtitle"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="pacer-exemplo-container">
-                <div class="pacer-exemplo-session">
-                    <h3 class="pacer-exemplo-title"></h3>
-                    <div class="pacer-exemplo-group">
-                        <span class="pacer-exemplo-subtitle"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="pacer-exemplo-container">
-                <div class="pacer-exemplo-session">
-                    <h3 class="pacer-exemplo-title"></h3>
-                    <div class="pacer-exemplo-group">
-                        <span class="pacer-exemplo-subtitle"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="pacer-exemplo-container">
-                <div class="pacer-exemplo-session">
-                    <h3 class="pacer-exemplo-title"></h3>
-                    <div class="pacer-exemplo-group">
-                        <span class="pacer-exemplo-subtitle"></span>
-                    </div>
-                </div>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style/reset.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style/base.css">
+  <link rel="stylesheet" href="./style/form-estudante.css">
+  <link rel="stylesheet" href="./style/pacer-exemplo.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+  <script src="./js/baseScript.js"></script>
+  <script src="./js/avaliacao.js"></script>
+  <title>PACER Fatec - Avaliação</title>
+</head>
+<body>
+  <div class="body-container">
+    <div class="main-header">
+      <div>
+        <span class="main-header-title">PACER</span> Fatec - Aluno
+      </div>
+      <a class="main-header-link" id="sair">Sair</a>
+    </div>
+    <label class="student-form-nota" id="situacaoSprint"></label><br>
+    <label class="student-form-points" id="pontosGrupo"></label><br>
+    <br><a class="main-header-link-alterar" id="alterar" href="#" onclick="abrirPopup()">Alterar grupo</a>
+    <div class="student-form-container">
+        <div class="student-form-input-label-group-sprint">
+            <div class="student-form-input-label">
+                <label class="student-form-label sprint-label" for="sprint">Sprint</label>
+                <select class="student-form-value skill-value" name="sprint" id="sprint"></select>
             </div>
         </div>
-    </body>
-</html>
+        <div style="margin-left: auto;">
+            <button type="submit" class="student-form-button" onclick="sendEvaluation()">Enviar</button>
+        </div>    
+    </div>    
+    
+    <div class="student-form-container">
+      <form class="student-form" action="javascript:sendEvaluation()" method="post">
+
+        <div class="student-form-input-label-group">
+          <div class="student-form-input-label">
+            <label class="student-form-label avaliado-label" for="avaliado" data-form-id="1">Email do avaliado:</label>
+            
+          </div>
+        </div>
+
+        <div class="student-form-input-label-group">
+          <div class="student-form-input-label">
+            <label class="student-form-label skill-label" for="skill1">Skill 1</label>
+            <select class="student-form-value skill-value" name="skill1" id="skill1" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="student-form-input-label-group">
+          <div class="student-form-input-label">
+            <label class="student-form-label skill-label" for="skill2">Skill 2</label>
+            <select class="student-form-value skill-value" name="skill2" id="skill2" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+          </div>
+        </div>
+        <div class="student-form-input-label-group">
+            <div class="student-form-input-label">
+              <label class="student-form-label skill-label" for="skill3">Skill 3</label>
+              <select class="student-form-value skill-value" name="skill3" id="skill3" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            </div>
+          </div>
+          
+          <div class="student-form-input-label-group">
+            <div class="student-form-input-label">
+              <label class="student-form-label skill-label" for="skill4">Skill 4</label>
+              <select class="student-form-value skill-value" name="skill4" id="skill4" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            </div>
+          </div>
+          
+          <div class="student-form-input-label-group">
+            <div class="student-form-input-label">
+              <label class="student-form-label skill-label" for="skill5">Skill 5</label>
+              <select class="student-form-value skill-value" name="skill5" id="skill5" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            </div>
+          </div> 
+  
+          <span style="margin-top: 10px;" id="mensagem"></span>
+        </form>
+      </div>
+  
+      <div class="student-form-container">
+        <form class="student-form" action="javascript:sendEvaluation()" method="post">
+  
+          <div class="student-form-input-label-group">
+            <div class="student-form-input-label">
+              <label class="student-form-label avaliado-label" for="avaliado" data-form-id="2">Email do avaliado:</label>
+              
+            </div>
+          </div>
+  
+          <div class="student-form-input-label-group">
+            <div class="student-form-input-label">
+              <label class="student-form-label skill-label" for="skill1">Skill 1</label>
+              <select class="student-form-value skill-value" name="skill1" id="skill1" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            </div>
+          </div>
+  
+          <div class="student-form-input-label-group">
+            <div class="student-form-input-label">
+              <label class="student-form-label skill-label" for="skill2">Skill 2</label>
+              <select class="student-form-value skill-value" name="skill2" id="skill2" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            </div>
+          </div>
+  
+          <div class="student-form-input-label-group">
+            <div class="student-form-input-label">
+              <label class="student-form-label skill-label" for="skill3">Skill 3</label>
+              <select class="student-form-value skill-value" name="skill3" id="skill3" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            </div>
+          </div>
+          
+          <div class="student-form-input-label-group">
+            <div class="student-form-input-label">
+              <label class="student-form-label skill-label" for="skill4">Skill 4</label>
+              <select class="student-form-value skill-value" name="skill4" id="skill4" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            </div>
+          </div>
+          
+          <div class="student-form-input-label-group">
+            <div class="student-form-input-label">
+              <label class="student-form-label skill-label" for="skill5">Skill 5</label>
+              <select class="student-form-value skill-value" name="skill5" id="skill5" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            </div>
+          </div> 
+  
+        </form>
+      </div>
+
+      <div class="student-form-container">
+        <form class="student-form" action="javascript:sendEvaluation()" method="post">
+  
+          <div class="student-form-input-label-group">
+            <div class="student-form-input-label">
+              <label class="student-form-label avaliado-label" for="avaliado" data-form-id="3">Email do avaliado:</label>
+              
+            </div>
+          </div>
+  
+          <div class="student-form-input-label-group">
+            <div class="student-form-input-label">
+              <label class="student-form-label skill-label" for="skill1">Skill 1</label>
+              <select class="student-form-value skill-value" name="skill1" id="skill1" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            </div>
+          </div>
+  
+          <div class="student-form-input-label-group">
+            <div class="student-form-input-label">
+              <label class="student-form-label skill-label" for="skill2">Skill 2</label>
+              <select class="student-form-value skill-value" name="skill2" id="skill2" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            </div>
+          </div>
+  
+          <div class="student-form-input-label-group">
+            <div class="student-form-input-label">
+              <label class="student-form-label skill-label" for="skill3">Skill 3</label>
+              <select class="student-form-value skill-value" name="skill3" id="skill3" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            </div>
+          </div>
+          
+          <div class="student-form-input-label-group">
+            <div class="student-form-input-label">
+              <label class="student-form-label skill-label" for="skill4">Skill 4</label>
+              <select class="student-form-value skill-value" name="skill4" id="skill4" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            </div>
+          </div>
+          
+          <div class="student-form-input-label-group">
+            <div class="student-form-input-label">
+              <label class="student-form-label skill-label" for="skill5">Skill 5</label>
+              <select class="student-form-value skill-value" name="skill5" id="skill5" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            </div>
+          </div> 
+  
+        </form>
+      </div>
+
+      <div class="student-form-container">
+        <form class="student-form" action="javascript:sendEvaluation()" method="post">
+  
+          <div class="student-form-input-label-group">
+            <div class="student-form-input-label">
+              <label class="student-form-label avaliado-label" for="avaliado" data-form-id="4">Email do avaliado:</label>
+              
+            </div>
+          </div>
+  
+          <div class="student-form-input-label-group">
+            <div class="student-form-input-label">
+              <label class="student-form-label skill-label" for="skill1">Skill 1</label>
+              <select class="student-form-value skill-value" name="skill1" id="skill1" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            </div>
+          </div>
+  
+          <div class="student-form-input-label-group">
+            <div class="student-form-input-label">
+              <label class="student-form-label skill-label" for="skill2">Skill 2</label>
+              <select class="student-form-value skill-value" name="skill2" id="skill2" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            </div>
+          </div>
+  
+          <div class="student-form-input-label-group">
+            <div class="student-form-input-label">
+              <label class="student-form-label skill-label" for="skill3">Skill 3</label>
+              <select class="student-form-value skill-value" name="skill3" id="skill3" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            </div>
+          </div>
+          
+          <div class="student-form-input-label-group">
+            <div class="student-form-input-label">
+              <label class="student-form-label skill-label" for="skill4">Skill 4</label>
+              <select class="student-form-value skill-value" name="skill4" id="skill4" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            </div>
+          </div>
+          
+          <div class="student-form-input-label-group">
+            <div class="student-form-input-label">
+              <label class="student-form-label skill-label" for="skill5">Skill 5</label>
+              <select class="student-form-value skill-value" name="skill5" id="skill5" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            </div>
+          </div> 
+  
+        </form>
+      </div>
+
+      <div class="student-form-container">
+        <form class="student-form" action="javascript:sendEvaluation()" method="post">
+  
+          <div class="student-form-input-label-group">
+            <div class="student-form-input-label">
+              <label class="student-form-label avaliado-label" for="avaliado" data-form-id="5"></label>Email do avaliado:</label>
+              
+            </div>
+          </div>
+  
+          <div class="student-form-input-label-group">
+            <div class="student-form-input-label">
+              <label class="student-form-label skill-label" for="skill1">Skill 1</label>
+              <select class="student-form-value skill-value" name="skill1" id="skill1" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            </div>
+          </div>
+  
+          <div class="student-form-input-label-group">
+            <div class="student-form-input-label">
+              <label class="student-form-label skill-label" for="skill2">Skill 2</label>
+              <select class="student-form-value skill-value" name="skill2" id="skill2" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            </div>
+          </div>
+  
+          <div class="student-form-input-label-group">
+            <div class="student-form-input-label">
+              <label class="student-form-label skill-label" for="skill3">Skill 3</label>
+              <select class="student-form-value skill-value" name="skill3" id="skill3" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            </div>
+          </div>
+          
+          <div class="student-form-input-label-group">
+            <div class="student-form-input-label">
+              <label class="student-form-label skill-label" for="skill4">Skill 4</label>
+              <select class="student-form-value skill-value" name="skill4" id="skill4" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            </div>
+          </div>
+          
+          <div class="student-form-input-label-group">
+            <div class="student-form-input-label">
+              <label class="student-form-label skill-label" for="skill5">Skill 5</label>
+              <select class="student-form-value skill-value" name="skill5" id="skill5" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            </div>
+          </div> 
+        </form>
+      </div>
+      <div class="pacer-exemplo-container">
+        <h1 class="pacer-exemplo-htitle">Explicação das Skills selecionadas pelo grupo:</h1>
+        <div class="pacer-exemplo-session">
+            <h3 class="pacer-exemplo-title"></h3>
+            <div class="pacer-exemplo-group">
+                <span class="pacer-exemplo-subtitle"></span>
+            </div>
+        </div>
+    </div>
+    <div class="pacer-exemplo-container">
+        <div class="pacer-exemplo-session">
+            <h3 class="pacer-exemplo-title"></h3>
+            <div class="pacer-exemplo-group">
+                <span class="pacer-exemplo-subtitle"></span>
+            </div>
+        </div>
+    </div>
+    <div class="pacer-exemplo-container">
+        <div class="pacer-exemplo-session">
+            <h3 class="pacer-exemplo-title"></h3>
+            <div class="pacer-exemplo-group">
+                <span class="pacer-exemplo-subtitle"></span>
+            </div>
+        </div>
+    </div>
+    <div class="pacer-exemplo-container">
+        <div class="pacer-exemplo-session">
+            <h3 class="pacer-exemplo-title"></h3>
+            <div class="pacer-exemplo-group">
+                <span class="pacer-exemplo-subtitle"></span>
+            </div>
+        </div>
+    </div>
+    <div class="pacer-exemplo-container">
+        <div class="pacer-exemplo-session">
+            <h3 class="pacer-exemplo-title"></h3>
+            <div class="pacer-exemplo-group">
+                <span class="pacer-exemplo-subtitle"></span>
+            </div>
+        </div>
+    </div>
+    </div>
+  </body>
+  </html>
+  
